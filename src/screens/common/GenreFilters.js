@@ -49,7 +49,7 @@ function GenreFilters() {
                       Genres
                       </Header>
                       <p>
-                        Select Type of Movies you Want to Watch
+                        Select Type of Movie you Want to Watch.
                       </p>
                     </Grid.Column>
                   

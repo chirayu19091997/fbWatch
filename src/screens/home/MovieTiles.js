@@ -4,13 +4,25 @@ import {
   Card,
   Button,
   Icon,
-  Image} from 'semantic-ui-react';
+  Image } from 'semantic-ui-react';
+import NavigationIcon from '@material-ui/icons/Navigation';
+import Fab from '@material-ui/core/Fab';
+import './Home.css';
 import moviesData from '../../moviesData.js';
 import Footer from '../common/footer.js';
 import GenreFilters from '../common/GenreFilters.js';
 
 const MovieTiles = (props) => {
   const [genActive, setgenActive] = useState(false);
+
+  const scrollToTop = () =>{
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth'
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
 
   const clickHandler =(event) => {
       event.preventDefault();
@@ -40,13 +52,13 @@ const MovieTiles = (props) => {
           <Card.Description>{movie.overview.slice(0,100)}...</Card.Description>
         </Card.Content>
         
-        <Card.Content extra>
+        <Card.Content extra style={{display: 'flex', justifyContent: 'space-between'}}>
           <a>
             <Icon name='download' />
               Download
           </a>
           <Link to={`/watch/${movie.id}`}>
-            <Icon name='download' />
+            <Icon name='film' />
               Watch
           </Link>
         </Card.Content>
@@ -54,6 +66,10 @@ const MovieTiles = (props) => {
       </Card>
       ))}
     </Card.Group>
+
+    <br/>
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+    <Fab variant="extended" onClick={scrollToTop}><NavigationIcon/>Back to Top</Fab></div>
 
     <Footer/>
     </div>

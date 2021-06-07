@@ -51,7 +51,7 @@ function Footer() {
                     </Header>
                     <p>
                       This is completely a non profitable and opensource project just for Users to Get their One Stop Entertainment.
-                      If you like our work support us buy a Coffee!
+                      If you like our work you can support us buy a Coffee!
                     </p>
                     <Link to="/donate">
                       <List link inverted>

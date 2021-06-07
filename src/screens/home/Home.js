@@ -69,7 +69,9 @@ export default class Home extends Component {
             </Menu.Menu>
           </Link>
         </Menu>
+
         <MovieTiles search={this.state.search}></MovieTiles>
+
       </div>
     )
   }

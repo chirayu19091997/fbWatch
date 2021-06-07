@@ -33,7 +33,7 @@ const App = () => {
                 <Header/>
                 <Signup/>
             </Route>
-            <Route path="/watch">
+            <Route path="/watch/:id">
                 <Header/>
                 <Watch/>
             </Route>

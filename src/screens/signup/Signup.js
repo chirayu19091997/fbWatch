@@ -4,6 +4,7 @@ import {
   Button,
   Form,
   Grid,
+  Icon,
   Header,
   Message,
   Segment } from 'semantic-ui-react';
@@ -20,7 +21,7 @@ const Signup = () => (
         <Segment stacked>
           <Form.Input 
           fluid 
-          Icon='user' 
+          icon='user' 
           iconPosition='left' 
           placeholder='E-mail address' 
           />
