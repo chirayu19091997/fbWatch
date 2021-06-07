@@ -1,5 +1,10 @@
 import React from 'react'
-import { List, Grid, Container, Segment, Header} from 'semantic-ui-react';
+import { 
+  List,
+  Grid,
+  Container,
+  Segment,
+  Header } from 'semantic-ui-react';
 
 function GenreFilters() {
     // const genres=["Science Fiction","Adventure","Family","Fantasy","Documentary","Animation","Thriller","Action","Horror","Comedy"]
@@ -10,6 +15,7 @@ function GenreFilters() {
               <Container>
                 <Grid divided inverted stackable>
                   <Grid.Row>
+                    
                     <Grid.Column width={3}>
                       <Header inverted as='h4' content='' />
                       <List link inverted>
@@ -18,6 +24,7 @@ function GenreFilters() {
                         <List.Item as='a'>Family</List.Item>
                       </List>
                     </Grid.Column>
+                    
                     <Grid.Column width={3}>
                       <Header inverted as='h4' content='' />
                       <List link inverted>
@@ -27,6 +34,7 @@ function GenreFilters() {
                         <List.Item as='a'>Thriller</List.Item>
                       </List>
                     </Grid.Column>
+                    
                     <Grid.Column width={3}>
                       <Header inverted as='h4' content='' />
                       <List link inverted>
@@ -35,6 +43,7 @@ function GenreFilters() {
                         <List.Item as='a'>Comedy</List.Item>
                       </List>
                     </Grid.Column>
+                    
                     <Grid.Column width={7}>
                       <Header as='h4' inverted>
                       Genres
@@ -43,6 +52,7 @@ function GenreFilters() {
                         Select Type of Movies you Want to Watch
                       </p>
                     </Grid.Column>
+                  
                   </Grid.Row>
                 </Grid>
               </Container>

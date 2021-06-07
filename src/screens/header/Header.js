@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import { Menu } from 'semantic-ui-react';
 import './Header.css';
-import { Link } from "react-router-dom";
 
 export default class Header extends Component {
   state = { activeItem: 'home' }
@@ -14,48 +14,46 @@ export default class Header extends Component {
     return (
       <div>
         <Menu pointing secondary>
-        <Link to="/">
-          <Menu.Item
-            name='FB()watch'
-            onClick={this.handleItemClick}
-          />
-          </Link>
-        <Link to="/">
-          <Menu.Item
-            name='Home'
-            active={activeItem === 'Home'}
-            onClick={this.handleItemClick}
-          />
-          </Link>
+          <Link to="/">
+            <Menu.Item
+              name='FB()watch'
+              onClick={this.handleItemClick}
+            />
+            </Link>
+          <Link to="/">
+            <Menu.Item
+              name='Home'
+              active={activeItem === 'Home'}
+              onClick={this.handleItemClick}
+            />
+            </Link>
 
-          <Link to="/movies">
-          <Menu.Item
-            name='Movies'
-            active={activeItem === 'Movies'}
-            onClick={this.handleItemClick}
-          />
-          </Link>
-
-          <Link to="/tv-shows">
-          <Menu.Item
-            name='Tv-shows'
-            active={activeItem === 'Tv-shows'}
-            onClick={this.handleItemClick}
-          />
-          </Link>
-
-            <Menu.Menu position='right'>
-              <Link to="/login">
+            <Link to="/movies">
               <Menu.Item
-                name='login'
-                active={activeItem === 'login'}
+                name='Movies'
+                active={activeItem === 'Movies'}
                 onClick={this.handleItemClick}
-              />          
-              </Link>
-            </Menu.Menu>
+              />
+            </Link>
 
+            <Link to="/tv-shows">
+              <Menu.Item
+                name='Tv-shows'
+                active={activeItem === 'Tv-shows'}
+                onClick={this.handleItemClick}
+              />
+            </Link>
 
-        </Menu>
+              <Menu.Menu position='right'>
+                <Link to="/login">
+                <Menu.Item
+                  name='login'
+                  active={activeItem === 'login'}
+                  onClick={this.handleItemClick}
+                />          
+                </Link>
+              </Menu.Menu>
+          </Menu>
       </div>
     )
   }

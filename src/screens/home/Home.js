@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Menu, Input } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
+import { 
+  Menu,
+  Input } from 'semantic-ui-react';
 import './Home.css';
 import MovieTiles from '../home/MovieTiles';
-import { Link } from "react-router-dom";
 
 export default class Home extends Component {
   state = { activeItem: 'home',search:'' }

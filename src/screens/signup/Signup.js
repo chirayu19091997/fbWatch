@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
+import { 
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment } from 'semantic-ui-react';
 
 const Signup = () => (
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
@@ -42,7 +49,7 @@ const Signup = () => (
       </Form>
 
       <Message>
-        Already Registered? <a href='#'>Login</a>
+        Already Registered? <Link to='/login'>Login</Link>
       </Message>
 
     </Grid.Column>

@@ -5,7 +5,6 @@ import Login from '../src/screens/login/login';
 import Signup from '../src/screens/signup/Signup';
 import Header from './screens/header/Header.js';
 import Home from '../src/screens/home/Home.js';
-import MovieTiles from '../src/screens/home/MovieTiles.js';
 import Watch from '../src/screens/watch/watch.js';
 import Donate from '../src/screens/donate/Donate.js';
 
