@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './index.css';
+import Login from '../src/screens/login/login';
+import Signup from '../src/screens/signup/Signup';
+import Header from './screens/header/Header.js';
+import Home from '../src/screens/home/Home.js';
+import MovieTiles from '../src/screens/home/MovieTiles.js';
+import Watch from '../src/screens/watch/watch.js';
+import Donate from '../src/screens/donate/Donate.js';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Tv from './screens/tv-shows/Tv';
+
+const App = () => {
+    return (
+    <Router>
+        <Switch>
+            <Route exact path="/">
+                <Home/>
+            </Route>
+            <Route exact path="/movies">
+                <Home/>
+            </Route>   
+            <Route exact path="/login">
+                <Header/>
+                <Login/>
+            </Route>
+            <Route exact path="/signup">
+                <Header/>
+                <Signup/>
+            </Route>
+            <Route path="/watch">
+                <Header/>
+                <Watch/>
+            </Route>
+            <Route exact path="/donate">
+                <Header/>
+                <Donate/>
+            </Route>
+            <Route exact path="/tv-shows">
+                <Header/>
+                <Tv/>
+            </Route>              
+        </Switch>
+    </Router>
+);
 }
 
 export default App;
