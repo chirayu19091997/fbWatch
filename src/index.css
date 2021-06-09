@@ -1,12 +1,3 @@
 .home-baground {
   background-image: linear-gradient(30deg, #ddd6f3, #faaca8);
 }
-.home-header { 
-  text-align: center;
-  align-items: center;
-  background-image: url('./bgimg.jpg');
-  vertical-align: center;
-  min-height: 100%;
-  background-position: center;
-  background-size: cover;
-}

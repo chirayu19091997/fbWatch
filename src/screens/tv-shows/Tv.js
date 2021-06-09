@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Tv = () => {
-    return (
-        <div>
-            <h1>NO TV SHOWS TO DISPLAY STAY TUNED !!!!!! </h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <h1>NO TV SHOWS TO DISPLAY STAY TUNED !!!!!! </h1>
+    </div>
+  );
+};
 
-export default Tv
+export default Tv;
