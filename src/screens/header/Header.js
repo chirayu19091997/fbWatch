@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, Header as Heading, Image, Button, Modal } from "semantic-ui-react";
+import {
+  Menu,
+  Header as Heading,
+  Image,
+  Button,
+  Modal,
+} from "semantic-ui-react";
 import "./Header.css";
 
 const Header = (props) => {
+  // States For Navigation Active Item
   const handleItemClick = (e, { name }) => setActiveItem(name);
-  const [activeItem, setActiveItem] = useState("home");
+  const [activeItem, setActiveItem] = useState("Home");
   const [open, setOpen] = useState(false);
 
   // Retreive LocalStorage Data
@@ -14,6 +21,7 @@ const Header = (props) => {
   const phone = localStorage.getItem("phone");
   const joined = localStorage.getItem("joined");
 
+  // Handler To Manage Login.
   const handleLogin = () => {
     setOpen(false);
     props.setLoggedin(false);

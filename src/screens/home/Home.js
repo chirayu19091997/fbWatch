@@ -5,21 +5,29 @@ import "./Home.css";
 import MovieTiles from "./MovieTiles";
 
 const Home = (props) => {
+
+  //States For NavBar Active Item.
   const handleItemClick = (e, { name }) => setActiveItem(name);
-  const [activeItem, setActiveItem] = useState("home");
-  const [state, setState] = useState("");
+  const [activeItem, setActiveItem] = useState("Home");
+
+  // State For Search Input.
+  const [search, setSearch] = useState("");
+
+  // State For Account Modal.
   const [open, setOpen] = useState(false);
 
-  // Retreive LocalStorage Data
+  // Retreive LocalStorage Data.
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
   const phone = localStorage.getItem("phone");
   const joined = localStorage.getItem("joined");
 
+  // Handler For Search Input.
   const handleItemChange = (event) => {
-    setState(event.target.value);
+    setSearch(event.target.value);
   };
 
+  // Handler For Login State.
   const handleLogin = () => {
     setOpen(false);
     props.setLoggedin(false);
@@ -27,9 +35,16 @@ const Home = (props) => {
 
   return (
     <>
+      {
+      /* NavigationBar UI section */
+      }
+
       <Menu pointing secondary>
         <Link to="/">
-          <Menu.Item name="FB()watch" onClick={handleItemClick} />
+          <Menu.Item
+            name="FB()watch"
+            onClick={handleItemClick}
+            />
         </Link>
 
         <Link to="/">
@@ -56,6 +71,10 @@ const Home = (props) => {
           />
         </Link>
 
+        {
+        /* Search Bar */
+        }
+
         <Menu.Menu position="right">
           <Menu.Item>
             <Input
@@ -67,6 +86,10 @@ const Home = (props) => {
             />
           </Menu.Item>
         </Menu.Menu>
+
+        {
+        /* Login UI Section */
+        }
 
         <Menu.Menu position="right">
           {props.loggedin ? (
@@ -115,8 +138,8 @@ const Home = (props) => {
           )}
         </Menu.Menu>
       </Menu>
-
-      <MovieTiles search={state}></MovieTiles>
+      
+      <MovieTiles search={search}></MovieTiles>
     </>
   );
 };

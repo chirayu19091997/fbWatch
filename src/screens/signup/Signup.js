@@ -11,6 +11,10 @@ import {
 } from "semantic-ui-react";
 
 const Signup = (props) => {
+  // UseHistory For Redirecting.
+  let history = useHistory();
+
+  // State For Signup Data.
   const [signup, setsignup] = useState({
     name: "",
     email: "",
@@ -19,7 +23,7 @@ const Signup = (props) => {
     confirmpassword: "",
   });
 
-  // Set The Login Account Data To Local Storage.
+  // Handler to Set The Login Account Data To Local Storage.
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -37,6 +41,7 @@ const Signup = (props) => {
       localStorage.setItem("password", user.password);
       localStorage.setItem("joined", user.joined);
       alert("Signup Success! Please Login to Continue.");
+      history.push("/login");
     } else {
       alert("Oops! Something Went Wrong Please Try Again.");
     }

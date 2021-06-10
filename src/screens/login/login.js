@@ -10,12 +10,16 @@ import {
 } from "semantic-ui-react";
 
 const Login = (props) => {
+  
   let history = useHistory();
+
+  // State For Login.
   const [Login, setLogin] = useState({
     email: "",
     password: "",
   });
 
+  // Handler For Retreiving Data And Login.
   const handleClick = (event) => {
     event.preventDefault();
 

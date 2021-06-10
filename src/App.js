@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import Login from "../src/screens/login/Login";
 import Signup from "../src/screens/signup/Signup";
 import Header from "./screens/header/Header.js";
@@ -11,8 +10,10 @@ import Tv from "./screens/tv-shows/Tv";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
+  // State For Login Status
   const [loggedin, setLoggedin] = useState(false);
 
+  // Handler For Login State
   const handler = (val) => {
     if (val) {
       setLoggedin(true);
@@ -22,34 +23,44 @@ const App = () => {
   };
 
   return (
+
     <Router>
       <Switch>
+
         <Route exact path="/">
           <Home loggedin={loggedin} setLoggedin={handler} />
         </Route>
+
         <Route exact path="/movies">
           <Home loggedin={loggedin} setLoggedin={handler} />
         </Route>
+
         <Route exact path="/login">
           <Login loggedin={loggedin} setLoggedin={handler} />
         </Route>
+
         <Route exact path="/signup">
           <Signup loggedin={loggedin} setLoggedin={handler} />
         </Route>
+
         <Route path="/watch/:id">
           <Header loggedin={loggedin} setLoggedin={handler} />
-          <Watch />
+          <Watch loggedin={loggedin} setLoggedin={handler} />
         </Route>
+
         <Route exact path="/donate">
           <Header loggedin={loggedin} setLoggedin={handler} />
-          <Donate />
+          <Donate loggedin={loggedin} setLoggedin={handler} />
         </Route>
+
         <Route exact path="/tv-shows">
           <Header loggedin={loggedin} setLoggedin={handler} />
           <Tv loggedin={loggedin} setLoggedin={handler} />
         </Route>
+
       </Switch>
     </Router>
+
   );
 };
 
