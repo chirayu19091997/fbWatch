@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Footer from "../common/Footer.js";
 import {useParams} from 'react-router';
 import './Watch.css';
-import { Menu, Segment, Header, Input, Image, Button, Modal } from "semantic-ui-react";
+import { Image, Button } from "semantic-ui-react";
 
 const Watch = () => {
   let {id} =useParams();
@@ -51,4 +51,5 @@ const Watch = () => {
     </div>
   );
 };
+
 export default Watch;

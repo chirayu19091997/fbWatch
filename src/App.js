@@ -6,6 +6,7 @@ import Home from "../src/screens/home/Home.js";
 import Watch from "../src/screens/watch/Watch.js";
 import Donate from "../src/screens/donate/Donate.js";
 import Tv from "./screens/tv-shows/Tv";
+import ProtectedRoute from './Protected';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -35,29 +36,34 @@ const App = () => {
           <Home loggedin={loggedin} setLoggedin={handler} />
         </Route>
 
-        <Route exact path="/login">
+        {/* <Route exact path="/login">
           <Login loggedin={loggedin} setLoggedin={handler} />
         </Route>
 
         <Route exact path="/signup">
           <Signup loggedin={loggedin} setLoggedin={handler} />
-        </Route>
+        </Route> */}
 
         <Route path="/watch/:id">
           <Header loggedin={loggedin} setLoggedin={handler} />
           <Watch loggedin={loggedin} setLoggedin={handler} />
         </Route>
 
-        <Route exact path="/donate">
+        {/* <Route exact path="/donate">
           <Header loggedin={loggedin} setLoggedin={handler} />
           <Donate loggedin={loggedin} setLoggedin={handler} />
-        </Route>
+        </Route> */}
 
-        <Route exact path="/tv-shows">
+        {/* <Route exact path="/tv-shows">
           <Header loggedin={loggedin} setLoggedin={handler} />
           <Tv loggedin={loggedin} setLoggedin={handler} />
-        </Route>
+        </Route> */}
 
+        <ProtectedRoute exact={true} loggedin={loggedin} setLoggedin={handler} path="/tv-shows" component={Tv} />
+        <ProtectedRoute exact={true} loggedin={loggedin} setLoggedin={handler} path="/donate" component={Donate} />
+        <ProtectedRoute exact={true} loggedin={loggedin} setLoggedin={handler} path="/login" component={Home} />
+        <ProtectedRoute exact={true} loggedin={loggedin} setLoggedin={handler} path="/signup" component={Signup} />
+        
       </Switch>
     </Router>
 
