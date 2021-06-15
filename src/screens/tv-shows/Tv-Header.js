@@ -4,21 +4,28 @@ import { Link, useHistory } from "react-router-dom";
 import {
   Menu,
   Header as Heading,
+  Input,
   Image,
   Button,
   Modal,
 } from "semantic-ui-react";
-import "./Header.css";
+import Tv from "./Tv";
 
-const Header = (props) => {
+const TvHome = (props) => {
   let history = useHistory();
 
-  // States For Navigation Active Item
+  //States For NavBar Active Item.
   const handleItemClick = (e, { name }) => setActiveItem(name);
-  const [activeItem, setActiveItem] = useState("Home");
+  const [activeItem, setActiveItem] = useState("Tv-shows");
+
+  // State For Search Input.
+  const [search, setSearch] = useState("");
+
+  // State For Account Modal.
   const [open, setOpen] = useState(false);
   const [userdata, setUserData] = useState({});
 
+  // Retreive LocalStorage and Api Data.
   useEffect(() => {
     if (props.adminstatus) {
       axios
@@ -39,21 +46,24 @@ const Header = (props) => {
     }
   }, []);
 
-  // Retreive LocalStorage & Api Data.
   const name = userdata.name;
   const email = userdata.email;
   const phone = userdata.phone;
   const joined = userdata.joined;
   const id = localStorage.getItem("id");
 
-  // Handler To Manage Login.
+  // Handler For Search Input.
+  const handleItemChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  // Handler For Login State.
   const handleLogout = () => {
     setOpen(false);
     props.setLoggedin(false);
     props.setAdminstatus(false);
   };
 
-  // Handlers For Admin Panel.
   const handlemanage = () => {
     history.push("/manage");
     setOpen(false);
@@ -66,10 +76,13 @@ const Header = (props) => {
 
   return (
     <>
+      {/* NavigationBar UI section */}
+
       <Menu pointing secondary>
         <Link to="/">
           <Menu.Item name="FB()watch" onClick={handleItemClick} />
         </Link>
+
         <Link to="/">
           <Menu.Item
             name="Home"
@@ -93,6 +106,22 @@ const Header = (props) => {
             onClick={handleItemClick}
           />
         </Link>
+
+        {/* Search Bar */}
+
+        <Menu.Menu position="right">
+          <Menu.Item>
+            <Input
+              // transparent
+              icon={{ name: "search", link: true }}
+              placeholder="Search Movie..."
+              className="search-style"
+              onChange={handleItemChange}
+            />
+          </Menu.Item>
+        </Menu.Menu>
+
+        {/* Login UI Section */}
 
         <Menu.Menu position="right">
           {props.loggedin ? (
@@ -202,8 +231,10 @@ const Header = (props) => {
           )}
         </Menu.Menu>
       </Menu>
+
+      <Tv search={search}></Tv>
     </>
   );
 };
 
-export default Header;
+export default TvHome;

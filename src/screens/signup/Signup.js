@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
@@ -28,18 +29,23 @@ const Signup = (props) => {
     event.preventDefault();
 
     if (signup.password === signup.confirmpassword && signup.password !== "") {
-      const user = {
-        name: signup.name,
-        phone: signup.phone,
-        email: signup.email,
-        joined: Date.now(),
-        password: signup.password,
-      };
-      localStorage.setItem("name", user.name);
-      localStorage.setItem("phone", user.phone);
-      localStorage.setItem("email", user.email);
-      localStorage.setItem("password", user.password);
-      localStorage.setItem("joined", user.joined);
+      axios
+        .post("http://localhost:5000/users", {
+          name: signup.name,
+          phone: signup.phone,
+          email: signup.email,
+          joined: Date.now(),
+          password: signup.password,
+          status: "Normal",
+        })
+        .then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       alert("Signup Success! Please Login to Continue.");
       history.push("/login");
     } else {
@@ -123,7 +129,6 @@ const Signup = (props) => {
         <Message>
           Already Registered? <Link to="/login">Login</Link>
         </Message>
-        
       </Grid.Column>
     </Grid>
   );

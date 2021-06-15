@@ -1,0 +1,27 @@
+{
+  "admin": [
+    {
+      "id": 1,
+      "name": "Chirayu Agrawal",
+      "email": "chirayu.agrawal4000@gmail.com",
+      "password": "chirayu"
+    },
+    {
+      "name": "b",
+      "email": "b",
+      "password": "b",
+      "id": 2
+    }
+  ],
+  "users": [
+    {
+      "name": "a",
+      "phone": "a",
+      "email": "a",
+      "joined": 1623691704977,
+      "password": "a",
+      "status": "Normal",
+      "id": 1
+    }
+  ]
+}

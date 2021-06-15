@@ -1,10 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, Header, Input, Image, Button, Modal } from "semantic-ui-react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import {
+  Menu,
+  Header as Heading,
+  Input,
+  Image,
+  Button,
+  Modal,
+} from "semantic-ui-react";
 import "./Home.css";
 import MovieTiles from "./MovieTiles";
 
 const Home = (props) => {
+  let history = useHistory();
 
   //States For NavBar Active Item.
   const handleItemClick = (e, { name }) => setActiveItem(name);
@@ -15,12 +24,34 @@ const Home = (props) => {
 
   // State For Account Modal.
   const [open, setOpen] = useState(false);
+  const [userdata, setUserData] = useState({});
 
-  // Retreive LocalStorage Data.
-  const name = localStorage.getItem("name");
-  const email = localStorage.getItem("email");
-  const phone = localStorage.getItem("phone");
-  const joined = localStorage.getItem("joined");
+  // Retreive LocalStorage and Api Data.
+  useEffect(() => {
+    if (props.adminstatus) {
+      axios
+        .get(`http://localhost:5000/admin/${id}`)
+        .then((response) => {
+          setUserData(response.data);
+          console.log(userdata);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      axios
+        .get(`http://localhost:5000/users/${id}`)
+        .then((response) => {
+          setUserData(response.data);
+          console.log(userdata);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
+
+  const name = userdata.name;
+  const email = userdata.email;
+  const phone = userdata.phone;
+  const joined = userdata.joined;
+  const id = localStorage.getItem("id");
 
   // Handler For Search Input.
   const handleItemChange = (event) => {
@@ -28,23 +59,29 @@ const Home = (props) => {
   };
 
   // Handler For Login State.
-  const handleLogin = () => {
+  const handleLogout = () => {
     setOpen(false);
     props.setLoggedin(false);
+    props.setAdminstatus(false);
+  };
+
+  const handlemanage = () => {
+    history.push("/manage");
+    setOpen(false);
+  };
+
+  const handleblacklist = () => {
+    history.push("/blacklist");
+    setOpen(false);
   };
 
   return (
     <>
-      {
-      /* NavigationBar UI section */
-      }
+      {/* NavigationBar UI section */}
 
       <Menu pointing secondary>
         <Link to="/">
-          <Menu.Item
-            name="FB()watch"
-            onClick={handleItemClick}
-            />
+          <Menu.Item name="FB()watch" onClick={handleItemClick} />
         </Link>
 
         <Link to="/">
@@ -71,9 +108,7 @@ const Home = (props) => {
           />
         </Link>
 
-        {
-        /* Search Bar */
-        }
+        {/* Search Bar */}
 
         <Menu.Menu position="right">
           <Menu.Item>
@@ -87,58 +122,117 @@ const Home = (props) => {
           </Menu.Item>
         </Menu.Menu>
 
-        {
-        /* Login UI Section */
-        }
+        {/* Login UI Section */}
 
         <Menu.Menu position="right">
           {props.loggedin ? (
-            <Modal
-              onClose={() => setOpen(false)}
-              onOpen={() => setOpen(true)}
-              open={open}
-              trigger={<Menu.Item>Hi! {name}</Menu.Item>}
-            >
-              <Modal.Header>Account Details</Modal.Header>
-              <Modal.Content image>
-                <Image size="medium" src="./rachel.png" wrapped />
-                <Modal.Description>
-                  <Header>Hello: {name}!</Header>
-                  <p>
-                    We've found the following gravatar image associated with
-                    your e-mail address.
-                  </p>
-                  <p>Email: {email}</p>
-                  <p>Phone: {phone}</p>
-                  <p>Joined: {joined}</p>
-                  <p>Premium: {}</p>
-                </Modal.Description>
-              </Modal.Content>
-              <Modal.Actions>
-                <Button color="black" onClick={() => setOpen(false)}>
-                  Close
-                </Button>
-                <Button
-                  content="Logout"
-                  labelPosition="right"
-                  icon="checkmark"
-                  onClick={handleLogin}
-                  positive
-                />
-              </Modal.Actions>
-            </Modal>
+            <>
+              {props.adminstatus ? (
+                <>
+                  <Modal
+                    onClose={() => setOpen(false)}
+                    onOpen={() => setOpen(true)}
+                    open={open}
+                    trigger={<Menu.Item>Admin Panel</Menu.Item>}
+                  >
+                    <Modal.Header>Admin Details</Modal.Header>
+                    <Modal.Content image>
+                      <Image size="medium" src="./rachel.png" wrapped />
+                      <Modal.Description>
+                        <Heading>Hello: {name}!</Heading>
+                        <p>
+                          Manage Users:{" "}
+                          <Button color="black" onClick={handlemanage}>
+                            Manage
+                          </Button>
+                        </p>
+                        <p>
+                          Blacklist Users:{" "}
+                          <Button color="black" onClick={handleblacklist}>
+                            Blacklist
+                          </Button>
+                        </p>
+                        <p>
+                          Maintenence Mode:{" "}
+                          <Button
+                            size="small"
+                            color="black"
+                            onClick={() =>
+                              props.setMaintenence(!props.maintenence)
+                            }
+                          >
+                            {props.maintenence ? "ON" : "OFF"}
+                          </Button>
+                        </p>
+                      </Modal.Description>
+                    </Modal.Content>
+                    <Modal.Actions>
+                      <Button color="black" onClick={() => setOpen(false)}>
+                        Close
+                      </Button>
+                      <Button
+                        content="Logout"
+                        labelPosition="right"
+                        icon="checkmark"
+                        onClick={handleLogout}
+                        positive
+                      />
+                    </Modal.Actions>
+                  </Modal>
+                </>
+              ) : (
+                <>
+                  <Modal
+                    onClose={() => setOpen(false)}
+                    onOpen={() => setOpen(true)}
+                    open={open}
+                    trigger={<Menu.Item>Hi! {name}</Menu.Item>}
+                  >
+                    <Modal.Header>Account Details</Modal.Header>
+                    <Modal.Content image>
+                      <Image size="medium" src="./rachel.png" wrapped />
+                      <Modal.Description>
+                        <Heading>Hello: {name}!</Heading>
+                        <p>
+                          We've found the following gravatar image associated
+                          with your e-mail address.
+                        </p>
+                        <p>Email: {email}</p>
+                        <p>Phone: {phone}</p>
+                        <p>Joined: {joined}</p>
+                        <p>Premium: {}</p>
+                      </Modal.Description>
+                    </Modal.Content>
+                    <Modal.Actions>
+                      <Button color="black" onClick={() => setOpen(false)}>
+                        Close
+                      </Button>
+                      <Button
+                        content="Logout"
+                        labelPosition="right"
+                        icon="checkmark"
+                        onClick={handleLogout}
+                        positive
+                      />
+                    </Modal.Actions>
+                  </Modal>
+                </>
+              )}
+            </>
           ) : (
-            <Link to="/login">
-              <Menu.Item
-                name="login"
-                active={activeItem === "login"}
-                onClick={handleItemClick}
-              />
-            </Link>
+            <>
+              <Link to="/login">
+                <Menu.Item
+                  name="login"
+                  active={activeItem === "login"}
+                  onClick={handleItemClick}
+                />
+              </Link>
+            </>
           )}
         </Menu.Menu>
       </Menu>
-      
+
       <MovieTiles search={search}></MovieTiles>
     </>
   );
