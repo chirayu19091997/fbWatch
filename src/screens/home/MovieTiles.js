@@ -82,7 +82,7 @@ const MovieTiles = (props) => {
       {!loading ? (
         <Card.Group>
           {tiles
-            .filter((movie) => movie.media_type === "movie")
+            .filter((movie) => movie.media_type !== "tv")
             .map((movie) => (
               <Card centered color="red">
                 <Image

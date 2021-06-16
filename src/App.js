@@ -5,7 +5,6 @@ import Header from "./screens/header/Header.js";
 import Home from "./screens/home/Home";
 import Watch from "./screens/watch/Watch.js";
 import Donate from "./screens/donate/Donate.js";
-import Tv from "./screens/tv-shows/Tv";
 import Users from "./screens/adminpanel/ManageUsers";
 import BlackList from "./screens/adminpanel/Blacklist";
 import ProtectedRoute from "./Protected";
@@ -13,6 +12,7 @@ import PublicRoute from "./Public";
 import Maintainence from "./screens/Maintainence/Maintenence";
 import TvHome from "./screens/tv-shows/Tv-Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Redirect } from "react-router";
 
 const App = () => {
   // State For Login Status
@@ -55,6 +55,8 @@ const App = () => {
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
+            maintenence={maintenence}
+            setMaintenence={handleMaintenence}
           />
         </Route>
 
@@ -64,6 +66,8 @@ const App = () => {
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
+            maintenence={maintenence}
+            setMaintenence={handleMaintenence}
           />
         </Route>
 
@@ -73,14 +77,20 @@ const App = () => {
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
+            maintenence={maintenence}
+            setMaintenence={handleMaintenence}
           />
           <Watch
             loggedin={loggedin}
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
+            maintenence={maintenence}
+            setMaintenence={handleMaintenence}
           />
         </Route>
+
+        {/* ProtectedRoute For Admin Operations */}
 
         <ProtectedRoute
           exact={true}
@@ -88,53 +98,75 @@ const App = () => {
           setLoggedin={handler}
           adminstatus={adminstatus}
           setAdminstatus={adminHandler}
-          path="/tv-shows"
-          component={TvHome}
-        />
-        <ProtectedRoute
-          exact={true}
-          loggedin={loggedin}
-          setLoggedin={handler}
-          adminstatus={adminstatus}
-          setAdminstatus={adminHandler}
-          path="/donate"
-          component={Donate}
-        />
-        <ProtectedRoute
-          exact={true}
-          loggedin={loggedin}
-          setLoggedin={handler}
-          adminstatus={adminstatus}
-          setAdminstatus={adminHandler}
+          maintenence={maintenence}
+          setMaintenence={handleMaintenence}
           path="/manage"
           component={Users}
         />
+        
         <ProtectedRoute
           exact={true}
           loggedin={loggedin}
           setLoggedin={handler}
           adminstatus={adminstatus}
           setAdminstatus={adminHandler}
+          maintenence={maintenence}
+          setMaintenence={handleMaintenence}
           path="/blacklist"
           component={BlackList}
         />
 
+        {/* Public Routes For Users */}
+
         <PublicRoute
           exact={true}
           loggedin={loggedin}
           setLoggedin={handler}
           adminstatus={adminstatus}
           setAdminstatus={adminHandler}
-          path="/login"
-          component={Login}
+          maintenence={maintenence}
+          setMaintenence={handleMaintenence}
+          path="/tv-shows"
+          component={TvHome}
         />
+
         <PublicRoute
           exact={true}
           loggedin={loggedin}
           setLoggedin={handler}
-          path="/signup"
-          component={Signup}
+          adminstatus={adminstatus}
+          setAdminstatus={adminHandler}
+          maintenence={maintenence}
+          setMaintenence={handleMaintenence}
+          path="/donate"
+          component={Donate}
         />
+
+        {/* Login Check */}
+
+        <Route exact path="/login">
+        {(loggedin) ? (
+          <Redirect to={{ pathname: "/" }} />
+          ) : (
+          <Login
+            loggedin={loggedin}
+            setLoggedin={handler}
+            adminstatus={adminstatus}
+            setAdminstatus={adminHandler}
+          />
+        )}
+        </Route>
+
+        <Route exact path="/signup">
+        {(loggedin) ? (
+          <Redirect to={{ pathname: "/" }} />
+          ) : (
+          <Signup
+            loggedin={loggedin}
+            setLoggedin={handler}
+          />
+        )}
+        </Route>
       </Switch>
     </Router>
   ) : (

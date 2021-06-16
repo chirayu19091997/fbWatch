@@ -1,25 +1,23 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import Header from "./screens/header/Header";
 
 class ProtectedRoute extends React.Component {
   render() {
     const Component = this.props.component;
-    return (this.props.loggedin) ? (
-      <div>
-        <Header
-          loggedin={this.props.loggedin}
-          setLoggedin={this.props.setLoggedin}
-          adminstatus={this.props.adminstatus}
-          setAdminstatus={this.props.setAdminstatus}
-        />
-        <Component
-          loggedin={this.props.loggedin}
-          setLoggedin={this.props.setLoggedin}
-        />
-      </div>
+    return (this.props.adminstatus) ? (
+      <Component
+        loggedin={this.props.loggedin}
+        setLoggedin={this.props.setLoggedin}
+        adminstatus={this.props.adminstatus}
+        setAdminstatus={this.props.setAdminstatus}
+        maintenence={this.props.maintenence}
+        setMaintenence={this.props.setMaintenence}
+      />
     ) : (
-      <Redirect to={{ pathname: "/login" }} />
+      <>
+        {alert("Unauthorised Access Please Login With Admin Id.")}
+        <Redirect to={{ pathname: "/login" }} />
+      </>
     );
   }
 }

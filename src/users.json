@@ -22,6 +22,15 @@
       "password": "a",
       "status": "Normal",
       "id": 1
+    },
+    {
+      "name": "d",
+      "phone": "d",
+      "email": "d",
+      "joined": 1623821213943,
+      "password": "d",
+      "status": "Blacklisted",
+      "id": 3
     }
   ]
 }
