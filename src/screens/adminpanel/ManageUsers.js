@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Button, Card, Image, Header } from "semantic-ui-react";
 
 const Users = () => {
@@ -19,7 +20,7 @@ const Users = () => {
     axios
       .delete(`http://localhost:5000/users/${id}`)
       .then((res) => {
-        alert("User Removed");
+        toast.success("User Removed");
       })
       .catch((err) => console.log(err));
   };
@@ -28,7 +29,7 @@ const Users = () => {
     axios
       .patch(`http://localhost:5000/users/${id}`, { status: "Normal" })
       .then((res) => {
-        alert("User is No Longer Premium!");
+        toast.success("User is No Longer Premium!");
       })
       .catch((err) => console.log(err));
   };

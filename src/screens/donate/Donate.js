@@ -9,8 +9,8 @@ function Donate(props) {
       setLoggedin={props.setLoggedin}
       adminstatus={props.adminstatus}
       setAdminstatus={props.setAdminstatus}
-      maintenence={props.maintenence}
-      setMaintenence={props.setMaintenence}
+      maintainence={props.maintainence}
+      setMaintainence={props.setMaintainence}
       />
       <h1>Support Page</h1>
     </div>

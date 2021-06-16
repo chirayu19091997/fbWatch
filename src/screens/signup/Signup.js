@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   Button,
   Form,
@@ -46,10 +47,10 @@ const Signup = (props) => {
             console.log(error);
           }
         );
-      alert("Signup Success! Please Login to Continue.");
+      toast.success("Signup Success! Please Login to Continue.");
       history.push("/login");
     } else {
-      alert("Oops! Something Went Wrong Please Try Again.");
+      toast.error("Oops! Something Went Wrong Please Try Again.");
     }
   };
 

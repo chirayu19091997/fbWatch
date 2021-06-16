@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
+import { toast } from "react-toastify";
 
 class PublicRoute extends Component {
   render() {
@@ -10,13 +11,13 @@ class PublicRoute extends Component {
         setLoggedin={this.props.setLoggedin}
         adminstatus={this.props.adminstatus}
         setAdminstatus={this.props.setAdminstatus}
-        maintenence={this.props.maintenence}
-        setMaintenence={this.props.setMaintenence}
+        maintainence={this.props.maintainence}
+        setMaintainence={this.props.setMaintainence}
       />
     ) : (
       <>
-      {alert("You Need To Be Member To Access This Page.")}
-      <Redirect to={{ pathname: "/login" }} />
+        {toast.info("You Need To Be Member To Access This Page.")}
+        <Redirect to={{ pathname: "/login" }} />
       </>
     );
   }

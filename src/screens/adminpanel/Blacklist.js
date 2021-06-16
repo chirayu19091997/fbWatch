@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Button, Card, Image, Header } from "semantic-ui-react";
 
 const Blacklist = () => {
@@ -19,7 +20,7 @@ const Blacklist = () => {
     axios
       .patch(`http://localhost:5000/users/${id}`, { status: "Blacklisted" })
       .then((res) => {
-        alert("User Blacklisted");
+        toast.success("User Blacklisted");
       })
       .catch((err) => console.log(err));
   };

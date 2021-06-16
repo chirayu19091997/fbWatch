@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   Menu,
   Header as Heading,
@@ -58,11 +59,12 @@ const Home = (props) => {
     setSearch(event.target.value);
   };
 
-  // Handler For Login State.
+  // Handler For Logout State.
   const handleLogout = () => {
     setOpen(false);
     props.setLoggedin(false);
     props.setAdminstatus(false);
+    toast.success("Successfully Logged Out.");
   };
 
   const handlemanage = () => {
@@ -153,15 +155,15 @@ const Home = (props) => {
                           </Button>
                         </p>
                         <p>
-                          Maintenence Mode:{" "}
+                          Maintainence Mode:{" "}
                           <Button
                             size="small"
                             color="black"
                             onClick={() =>
-                              props.setMaintenence(!props.maintenence)
+                              props.setMaintainence(!props.maintainence)
                             }
                           >
-                            {props.maintenence ? "ON" : "OFF"}
+                            {props.maintainence ? "ON" : "OFF"}
                           </Button>
                         </p>
                       </Modal.Description>

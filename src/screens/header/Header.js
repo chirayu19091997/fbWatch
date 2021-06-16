@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   Menu,
   Header as Heading,
@@ -46,11 +47,12 @@ const Header = (props) => {
   const joined = userdata.joined;
   const id = localStorage.getItem("id");
 
-  // Handler To Manage Login.
+  // Handler To Manage Logout.
   const handleLogout = () => {
     setOpen(false);
     props.setLoggedin(false);
     props.setAdminstatus(false);
+    toast.success('Succesfully Logged Out.');
   };
 
   // Handlers For Admin Panel.
@@ -123,15 +125,15 @@ const Header = (props) => {
                           </Button>
                         </p>
                         <p>
-                          Maintenence Mode:{" "}
+                          Maintainence Mode:{" "}
                           <Button
                             size="small"
                             color="black"
                             onClick={() =>
-                              props.setMaintenence(!props.maintenence)
+                              props.setMaintainence(!props.maintainence)
                             }
                           >
-                            {props.maintenence ? "ON" : "OFF"}
+                            {props.maintainence ? "ON" : "OFF"}
                           </Button>
                         </p>
                       </Modal.Description>

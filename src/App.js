@@ -9,16 +9,22 @@ import Users from "./screens/adminpanel/ManageUsers";
 import BlackList from "./screens/adminpanel/Blacklist";
 import ProtectedRoute from "./Protected";
 import PublicRoute from "./Public";
-import Maintainence from "./screens/Maintainence/Maintenence";
+import Maintainence from "./screens/Maintainence/Maintainence";
 import TvHome from "./screens/tv-shows/Tv-Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Redirect } from "react-router";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  // State For Login Status
+  // Setup Toast.
+  toast.configure();
+  // State For Login Status.
   const [loggedin, setLoggedin] = useState(false);
   const [adminstatus, setAdminstatus] = useState(false);
-  const [maintenence, setMaintenence] = useState(false);
+
+  // State For Maintainence Mode.
+  const [maintainence, setMaintainence] = useState(false);
 
   // Handler For Login State
   const handler = (val) => {
@@ -38,15 +44,15 @@ const App = () => {
     }
   };
 
-  const handleMaintenence = (val) => {
+  const handleMaintainence = (val) => {
     if (val) {
-      setMaintenence(true);
+      setMaintainence(true);
     } else {
-      setMaintenence(false);
+      setMaintainence(false);
     }
   };
 
-  return !maintenence ? (
+  return !maintainence ? (
     <Router>
       <Switch>
         <Route exact path="/">
@@ -55,8 +61,8 @@ const App = () => {
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
-            maintenence={maintenence}
-            setMaintenence={handleMaintenence}
+            maintainence={maintainence}
+            setMaintainence={handleMaintainence}
           />
         </Route>
 
@@ -66,8 +72,8 @@ const App = () => {
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
-            maintenence={maintenence}
-            setMaintenence={handleMaintenence}
+            maintainence={maintainence}
+            setMaintainence={handleMaintainence}
           />
         </Route>
 
@@ -77,16 +83,16 @@ const App = () => {
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
-            maintenence={maintenence}
-            setMaintenence={handleMaintenence}
+            maintainence={maintainence}
+            setMaintainence={handleMaintainence}
           />
           <Watch
             loggedin={loggedin}
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
-            maintenence={maintenence}
-            setMaintenence={handleMaintenence}
+            maintainence={maintainence}
+            setMaintainence={handleMaintainence}
           />
         </Route>
 
@@ -98,20 +104,20 @@ const App = () => {
           setLoggedin={handler}
           adminstatus={adminstatus}
           setAdminstatus={adminHandler}
-          maintenence={maintenence}
-          setMaintenence={handleMaintenence}
+          maintainence={maintainence}
+          setMaintainence={handleMaintainence}
           path="/manage"
           component={Users}
         />
-        
+
         <ProtectedRoute
           exact={true}
           loggedin={loggedin}
           setLoggedin={handler}
           adminstatus={adminstatus}
           setAdminstatus={adminHandler}
-          maintenence={maintenence}
-          setMaintenence={handleMaintenence}
+          maintainence={maintainence}
+          setMaintainence={handleMaintainence}
           path="/blacklist"
           component={BlackList}
         />
@@ -124,8 +130,8 @@ const App = () => {
           setLoggedin={handler}
           adminstatus={adminstatus}
           setAdminstatus={adminHandler}
-          maintenence={maintenence}
-          setMaintenence={handleMaintenence}
+          maintainence={maintainence}
+          setMaintainence={handleMaintainence}
           path="/tv-shows"
           component={TvHome}
         />
@@ -136,8 +142,8 @@ const App = () => {
           setLoggedin={handler}
           adminstatus={adminstatus}
           setAdminstatus={adminHandler}
-          maintenence={maintenence}
-          setMaintenence={handleMaintenence}
+          maintainence={maintainence}
+          setMaintainence={handleMaintainence}
           path="/donate"
           component={Donate}
         />
@@ -145,27 +151,24 @@ const App = () => {
         {/* Login Check */}
 
         <Route exact path="/login">
-        {(loggedin) ? (
-          <Redirect to={{ pathname: "/" }} />
+          {loggedin ? (
+            <Redirect to={{ pathname: "/" }} />
           ) : (
-          <Login
-            loggedin={loggedin}
-            setLoggedin={handler}
-            adminstatus={adminstatus}
-            setAdminstatus={adminHandler}
-          />
-        )}
+            <Login
+              loggedin={loggedin}
+              setLoggedin={handler}
+              adminstatus={adminstatus}
+              setAdminstatus={adminHandler}
+            />
+          )}
         </Route>
 
         <Route exact path="/signup">
-        {(loggedin) ? (
-          <Redirect to={{ pathname: "/" }} />
+          {loggedin ? (
+            <Redirect to={{ pathname: "/" }} />
           ) : (
-          <Signup
-            loggedin={loggedin}
-            setLoggedin={handler}
-          />
-        )}
+            <Signup loggedin={loggedin} setLoggedin={handler} />
+          )}
         </Route>
       </Switch>
     </Router>
@@ -178,16 +181,16 @@ const App = () => {
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
-            maintenence={maintenence}
-            setMaintenence={handleMaintenence}
+            maintainence={maintainence}
+            setMaintainence={handleMaintainence}
           />
           <Maintainence
             loggedin={loggedin}
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
-            maintenence={maintenence}
-            setMaintenence={handleMaintenence}
+            maintainence={maintainence}
+            setMaintainence={handleMaintainence}
           />
         </Route>
       </Switch>
