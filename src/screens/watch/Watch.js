@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Footer from "../common/Footer.js";
 import { useParams } from "react-router";
-import "./Watch.css";
 import { Image, Button } from "semantic-ui-react";
 
 const Watch = () => {

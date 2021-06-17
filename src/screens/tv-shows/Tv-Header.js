@@ -201,7 +201,7 @@ const TvHome = (props) => {
                         <p>Email: {email}</p>
                         <p>Phone: {phone}</p>
                         <p>Joined: {joined}</p>
-                        <p>Premium: {}</p>
+                        <p>Premium: { }</p>
                       </Modal.Description>
                     </Modal.Content>
                     <Modal.Actions>

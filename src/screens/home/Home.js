@@ -10,7 +10,6 @@ import {
   Button,
   Modal,
 } from "semantic-ui-react";
-import "./Home.css";
 import MovieTiles from "./MovieTiles";
 
 const Home = (props) => {
@@ -202,7 +201,7 @@ const Home = (props) => {
                         <p>Email: {email}</p>
                         <p>Phone: {phone}</p>
                         <p>Joined: {joined}</p>
-                        <p>Premium: {}</p>
+                        <p>Premium: { }</p>
                       </Modal.Description>
                     </Modal.Content>
                     <Modal.Actions>

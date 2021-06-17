@@ -9,7 +9,6 @@ import {
   Button,
   Modal,
 } from "semantic-ui-react";
-import "./Header.css";
 
 const Header = (props) => {
   let history = useHistory();
@@ -52,7 +51,7 @@ const Header = (props) => {
     setOpen(false);
     props.setLoggedin(false);
     props.setAdminstatus(false);
-    toast.success('Succesfully Logged Out.');
+    toast.success("Successfully Logged Out.");
   };
 
   // Handlers For Admin Panel.
@@ -172,7 +171,7 @@ const Header = (props) => {
                         <p>Email: {email}</p>
                         <p>Phone: {phone}</p>
                         <p>Joined: {joined}</p>
-                        <p>Premium: {}</p>
+                        <p>Premium: { }</p>
                       </Modal.Description>
                     </Modal.Content>
                     <Modal.Actions>

@@ -4,7 +4,6 @@ import axios from "axios";
 import { Card, Button, Icon, Image } from "semantic-ui-react";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import Fab from "@material-ui/core/Fab";
-import "./Home.css";
 import Footer from "../common/Footer.js";
 import GenreFilters from "../common/GenreFilters.js";
 
@@ -56,7 +55,6 @@ const MovieTiles = (props) => {
 
   return (
     <div id="cards">
-      
       {/* Filters UI Section */}
 
       <Button
