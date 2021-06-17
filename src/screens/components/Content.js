@@ -4,57 +4,57 @@ import axios from "axios";
 import { Card, Button, Icon, Image } from "semantic-ui-react";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import Fab from "@material-ui/core/Fab";
-import Footer from "../common/Footer.js";
-import GenreFilters from "../common/GenreFilters.js";
+import Footer from "../common/Footer";
+import GenreFilters from "../common/GenreFilters";
 
-const MovieTiles = (props) => {
-  // Filters Section
-  const search = props.search;
-  const [tiles, setTiles] = useState([]);
-  const [genActive, setgenActive] = useState(false);
-  const [loading, setloading] = useState(false);
-  // let data=[];
-  const clickHandler = (event) => {
-    event.preventDefault();
-    setgenActive(!genActive);
-  };
-  useEffect(() => {
-    console.log(search);
-    if (search !== "") {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=70ff3f0b91ef9042cccf0562ca7af840&query=${search}`
-        )
-        .then(async (res) => {
-          setloading(true);
-          const data = await res.data.results;
-          setTiles(data);
-          setloading(false);
-        })
-        .catch((err) => console.log(err));
-    } else {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/trending/all/week?api_key=70ff3f0b91ef9042cccf0562ca7af840`
-        )
-        .then((res) => {
-          setTiles(res.data.results);
-          console.log(res.data.results);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [search]);
-
-  // Scroll To Top Section
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+const Content = (props) => {
+    // Filters Section
+    const search = props.search;
+    const [tiles, setTiles] = useState([]);
+    const [genActive, setgenActive] = useState(false);
+    const [loading, setloading] = useState(false);
+  
+    const clickHandler = (event) => {
+      event.preventDefault();
+      setgenActive(!genActive);
+    };
+  
+    useEffect(() => {
+      if (search !== "") {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/search/movie?api_key=70ff3f0b91ef9042cccf0562ca7af840&query=${search}`
+          )
+          .then(async (res) => {
+            setloading(true);
+            const data = await res.data.results;
+            setTiles(data);
+            setloading(false);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/trending/all/week?api_key=70ff3f0b91ef9042cccf0562ca7af840`
+          )
+          .then((res) => {
+            setTiles(res.data.results);
+          })
+          .catch((err) => console.log(err));
+      }
+    }, [search]);
+  
+    // Scroll To Top Section
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    };
 
   return (
-    <div id="cards">
+    <>
+          <div id="cards">
       {/* Filters UI Section */}
 
       <Button
@@ -80,7 +80,7 @@ const MovieTiles = (props) => {
       {!loading ? (
         <Card.Group>
           {tiles
-            .filter((movie) => movie.media_type !== "tv")
+            .filter((movie) => movie.media_type !== props.notType)
             .map((movie) => (
               <Card centered color="red">
                 <Image
@@ -133,7 +133,8 @@ const MovieTiles = (props) => {
 
       <Footer />
     </div>
-  );
-};
+    </>
+  )
+}
 
-export default MovieTiles;
+export default Content;

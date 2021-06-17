@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import {
   Button,
@@ -33,7 +33,6 @@ const Login = (props) => {
       .then(async (res) => {
         userdata = await res[0].data;
         admindata = await res[1].data;
-        console.log(userdata, admindata);
         verification();
       })
       .catch((err) => console.log(err));
@@ -111,8 +110,13 @@ const Login = (props) => {
         </Form>
 
         <Message>
+          Forgot Password <Link to="/reset">Reset</Link>
+        </Message>
+
+        <Message>
           New to us? <Link to="/signup">Sign Up</Link>
         </Message>
+        
       </Grid.Column>
     </Grid>
   );

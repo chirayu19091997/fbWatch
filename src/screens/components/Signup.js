@@ -7,7 +7,7 @@ import {
   Form,
   Grid,
   Icon,
-  Header,
+  Header as Heading,
   Message,
   Segment,
 } from "semantic-ui-react";
@@ -57,10 +57,10 @@ const Signup = (props) => {
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="teal" textAlign="center">
+        <Heading as="h2" color="teal" textAlign="center">
           {/* <Image src='/logo.png' />  */}
           Signup on fbWatch
-        </Header>
+        </Heading>
 
         <Form size="large">
           <Segment stacked>

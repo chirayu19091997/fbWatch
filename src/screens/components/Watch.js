@@ -15,7 +15,6 @@ const Watch = () => {
       )
       .then((res) => {
         setTiles(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);

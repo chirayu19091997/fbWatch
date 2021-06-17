@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { List, Grid, Container, Segment, Header } from "semantic-ui-react";
+import {
+  List,
+  Grid,
+  Container,
+  Segment,
+  Header as Heading,
+} from "semantic-ui-react";
 
-function Footer() {
+const Footer = () => {
   return (
     <div>
       <br></br>
@@ -11,7 +17,7 @@ function Footer() {
           <Grid divided inverted stackable>
             <Grid.Row>
               <Grid.Column width={3}>
-                <Header inverted as="h4" content="About" />
+                <Heading inverted as="h4" content="About" />
                 <List link inverted>
                   <List.Item as="a">Sitemap</List.Item>
                   <List.Item as="a">Contact Us</List.Item>
@@ -20,7 +26,7 @@ function Footer() {
               </Grid.Column>
 
               <Grid.Column width={3}>
-                <Header inverted as="h4" content="More" />
+                <Heading inverted as="h4" content="More" />
                 <List link inverted>
                   <List.Item as="a">Request</List.Item>
                   <List.Item as="a">Report Inappropriate</List.Item>
@@ -30,7 +36,7 @@ function Footer() {
               </Grid.Column>
 
               <Grid.Column width={3}>
-                <Header inverted as="h4" content="Social & Sources" />
+                <Heading inverted as="h4" content="Social & Sources" />
                 <List link inverted>
                   <List.Item as="a">Telegram</List.Item>
                   <List.Item as="a">Instagram</List.Item>
@@ -40,9 +46,9 @@ function Footer() {
               </Grid.Column>
 
               <Grid.Column width={7}>
-                <Header as="h4" inverted>
+                <Heading as="h4" inverted>
                   Wonder Why?
-                </Header>
+                </Heading>
                 <p>
                   This is completely a non profitable and opensource project
                   just for Users to Get their One Stop Entertainment. If you
@@ -60,6 +66,6 @@ function Footer() {
       </Segment>
     </div>
   );
-}
+};
 
 export default Footer;

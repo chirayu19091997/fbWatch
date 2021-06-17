@@ -1,24 +1,27 @@
 import React, { useState } from "react";
-import Login from "./screens/login/Login";
-import Signup from "./screens/signup/Signup";
-import Header from "./screens/header/Header.js";
-import Home from "./screens/home/Home";
-import Watch from "./screens/watch/Watch.js";
-import Donate from "./screens/donate/Donate.js";
-import Users from "./screens/adminpanel/ManageUsers";
-import BlackList from "./screens/adminpanel/Blacklist";
-import ProtectedRoute from "./Protected";
-import PublicRoute from "./Public";
-import Maintainence from "./screens/Maintainence/Maintainence";
-import TvHome from "./screens/tv-shows/Tv-Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Redirect } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import ProtectedRoute from "./screens/routes/Protected";
+import PublicRoute from "./screens/routes/Public";
+
+import Login from "./screens/components/Login";
+import Signup from "./screens/components/Signup";
+import Watch from "./screens/components/Watch";
+import Donate from "./screens/components/Donate";
+import Reset from "./screens/components/Resetpassword";
+import Users from "./screens/adminpanel/ManageUsers";
+import BlackList from "./screens/adminpanel/Blacklist";
+import Maintainence from "./screens/Maintainence/Maintainence";
+import Wrapper from "./Wrapper";
+import Content from "./screens/components/Content"
+
 const App = () => {
   // Setup Toast.
   toast.configure();
+
   // State For Login Status.
   const [loggedin, setLoggedin] = useState(false);
   const [adminstatus, setAdminstatus] = useState(false);
@@ -26,7 +29,15 @@ const App = () => {
   // State For Maintainence Mode.
   const [maintainence, setMaintainence] = useState(false);
 
-  // Handler For Login State
+  // State For Search Input.
+  const [search, setSearch] = useState("");
+
+  // Handler For Search Input.
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
+  // Handler For Login State.
   const handler = (val) => {
     if (val) {
       setLoggedin(true);
@@ -35,7 +46,7 @@ const App = () => {
     }
   };
 
-  // Handler For Admin Panel Logout
+  // Handler For Admin Panel Logout.
   const adminHandler = (val) => {
     if (val) {
       setAdminstatus(true);
@@ -44,6 +55,7 @@ const App = () => {
     }
   };
 
+  // Handler For Maintainence Mode.
   const handleMaintainence = (val) => {
     if (val) {
       setMaintainence(true);
@@ -56,43 +68,49 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/">
-          <Home
+          <Wrapper
             loggedin={loggedin}
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
             maintainence={maintainence}
             setMaintainence={handleMaintainence}
+            search={search}
+            setSearch={handleSearch}
+            searchable={true}
+            notType={""}
+            component={Content}
           />
         </Route>
 
         <Route exact path="/movies">
-          <Home
+          <Wrapper
             loggedin={loggedin}
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
             maintainence={maintainence}
             setMaintainence={handleMaintainence}
+            search={search}
+            setSearch={handleSearch}
+            searchable={true}
+            notType={"tv"}
+            component={Content}
           />
         </Route>
 
         <Route path="/watch/:id">
-          <Header
+          <Wrapper
             loggedin={loggedin}
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
             maintainence={maintainence}
             setMaintainence={handleMaintainence}
-          />
-          <Watch
-            loggedin={loggedin}
-            setLoggedin={handler}
-            adminstatus={adminstatus}
-            setAdminstatus={adminHandler}
-            maintainence={maintainence}
-            setMaintainence={handleMaintainence}
+            search={search}
+            setSearch={handleSearch}
+            searchable={false}
+            component={Watch}
           />
         </Route>
 
@@ -106,6 +124,7 @@ const App = () => {
           setAdminstatus={adminHandler}
           maintainence={maintainence}
           setMaintainence={handleMaintainence}
+          searchable={false}
           path="/manage"
           component={Users}
         />
@@ -118,6 +137,7 @@ const App = () => {
           setAdminstatus={adminHandler}
           maintainence={maintainence}
           setMaintainence={handleMaintainence}
+          searchable={false}
           path="/blacklist"
           component={BlackList}
         />
@@ -132,8 +152,12 @@ const App = () => {
           setAdminstatus={adminHandler}
           maintainence={maintainence}
           setMaintainence={handleMaintainence}
+          searchable={true}
+          notType={"movie"}
+          search={search}
+          setSearch={handleSearch}
           path="/tv-shows"
-          component={TvHome}
+          component={Content}
         />
 
         <PublicRoute
@@ -144,6 +168,7 @@ const App = () => {
           setAdminstatus={adminHandler}
           maintainence={maintainence}
           setMaintainence={handleMaintainence}
+          searchable={false}
           path="/donate"
           component={Donate}
         />
@@ -167,30 +192,45 @@ const App = () => {
           {loggedin ? (
             <Redirect to={{ pathname: "/" }} />
           ) : (
-            <Signup loggedin={loggedin} setLoggedin={handler} />
+            <Signup 
+              loggedin={loggedin} 
+              setLoggedin={handler}
+            />
           )}
         </Route>
+
+        <Route path="/reset">
+          <Reset
+            loggedin={loggedin}
+            setLoggedin={handler}
+            adminstatus={adminstatus}
+            setAdminstatus={adminHandler}
+            maintainence={maintainence}
+            setMaintainence={handleMaintainence}
+            search={search}
+            setSearch={handleSearch}
+            searchable={false}
+            component={Watch}
+          />
+        </Route>
+
       </Switch>
     </Router>
   ) : (
     <Router>
       <Switch>
         <Route path="/">
-          <Header
+          <Wrapper
             loggedin={loggedin}
             setLoggedin={handler}
             adminstatus={adminstatus}
             setAdminstatus={adminHandler}
             maintainence={maintainence}
             setMaintainence={handleMaintainence}
-          />
-          <Maintainence
-            loggedin={loggedin}
-            setLoggedin={handler}
-            adminstatus={adminstatus}
-            setAdminstatus={adminHandler}
-            maintainence={maintainence}
-            setMaintainence={handleMaintainence}
+            search={search}
+            setSearch={handleSearch}
+            searchable={false}
+            component={Maintainence}
           />
         </Route>
       </Switch>

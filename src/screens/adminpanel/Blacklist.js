@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
-import { Button, Card, Image, Header } from "semantic-ui-react";
+import { Button, Card, Image, Header as Heading } from "semantic-ui-react";
 
 const Blacklist = () => {
   const [users, setUsers] = useState([]);
@@ -27,9 +27,9 @@ const Blacklist = () => {
 
   return (
     <div style={{ margin: "30px 15px 0 15px" }}>
-      <Header as="h3" block fluid style={{ textAlign: "center" }}>
+      <Heading as="h3" block fluid style={{ textAlign: "center" }}>
         Blacklist Panel
-      </Header>
+      </Heading>
       <Card.Group>
         {users.map((user) => (
           <Card centered>

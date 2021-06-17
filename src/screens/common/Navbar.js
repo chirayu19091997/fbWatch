@@ -1,39 +1,31 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   Menu,
-  Header as Heading,
   Input,
+  Header as Heading,
   Image,
   Button,
   Modal,
 } from "semantic-ui-react";
-import MovieTiles from "./MovieTiles";
 
-const Home = (props) => {
+const Navbar = (props) => {
   let history = useHistory();
 
-  //States For NavBar Active Item.
+  // States For Navigation Active Item
   const handleItemClick = (e, { name }) => setActiveItem(name);
   const [activeItem, setActiveItem] = useState("Home");
-
-  // State For Search Input.
-  const [search, setSearch] = useState("");
-
-  // State For Account Modal.
   const [open, setOpen] = useState(false);
   const [userdata, setUserData] = useState({});
 
-  // Retreive LocalStorage and Api Data.
   useEffect(() => {
     if (props.adminstatus) {
       axios
         .get(`http://localhost:5000/admin/${id}`)
         .then((response) => {
           setUserData(response.data);
-          console.log(userdata);
         })
         .catch((err) => console.log(err));
     } else {
@@ -41,24 +33,19 @@ const Home = (props) => {
         .get(`http://localhost:5000/users/${id}`)
         .then((response) => {
           setUserData(response.data);
-          console.log(userdata);
         })
         .catch((err) => console.log(err));
     }
   }, []);
 
+  // Retreive LocalStorage & Api Data.
   const name = userdata.name;
   const email = userdata.email;
   const phone = userdata.phone;
   const joined = userdata.joined;
   const id = localStorage.getItem("id");
 
-  // Handler For Search Input.
-  const handleItemChange = (event) => {
-    setSearch(event.target.value);
-  };
-
-  // Handler For Logout State.
+  // Handler To Manage Logout.
   const handleLogout = () => {
     setOpen(false);
     props.setLoggedin(false);
@@ -66,6 +53,7 @@ const Home = (props) => {
     toast.success("Successfully Logged Out.");
   };
 
+  // Handlers For Admin Panel.
   const handlemanage = () => {
     history.push("/manage");
     setOpen(false);
@@ -78,13 +66,10 @@ const Home = (props) => {
 
   return (
     <>
-      {/* NavigationBar UI section */}
-
       <Menu pointing secondary>
         <Link to="/">
           <Menu.Item name="FB()watch" onClick={handleItemClick} />
         </Link>
-
         <Link to="/">
           <Menu.Item
             name="Home"
@@ -109,21 +94,23 @@ const Home = (props) => {
           />
         </Link>
 
-        {/* Search Bar */}
-
         <Menu.Menu position="right">
+          {props.searchable ? 
+          (
           <Menu.Item>
             <Input
               // transparent
               icon={{ name: "search", link: true }}
               placeholder="Search Movie..."
               className="search-style"
-              onChange={handleItemChange}
+              onChange={props.setSearch}
             />
           </Menu.Item>
+          ) : (
+            <>
+            </>
+          )}
         </Menu.Menu>
-
-        {/* Login UI Section */}
 
         <Menu.Menu position="right">
           {props.loggedin ? (
@@ -233,10 +220,8 @@ const Home = (props) => {
           )}
         </Menu.Menu>
       </Menu>
-
-      <MovieTiles search={search}></MovieTiles>
     </>
   );
 };
 
-export default Home;
+export default Navbar;
