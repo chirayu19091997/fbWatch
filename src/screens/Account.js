@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-const Reset = (props) => {
+const Account = (props) => {
   return (
     <View>
-      <Text></Text>
+      <Text>This is Account Panel.</Text>
     </View>
   );
 };
 
-export default Reset;
+export default Account;
