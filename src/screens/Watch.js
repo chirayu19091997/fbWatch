@@ -8,6 +8,9 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 // Component Imports
 import Content from "./Content";
@@ -31,20 +34,95 @@ const Watch = (props) => {
   return (
     <View style={styles.defview}>
       <ScrollView>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("video", {
-              data: { id: id },
-            });
-          }}
-        >
+        <View style={styles.banner}>
+          {/* <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate("video", {
+                data: { id: id },
+              });
+            }}
+            style={styles.imagesss}
+          > */}
           <Image
             source={{
               uri: "https://image.tmdb.org/t/p/w500" + tiles.poster_path,
             }}
             style={styles.imagesss}
           />
-        </TouchableOpacity>
+          {/* </TouchableOpacity> */}
+
+          <View style={styles.rbcontainer}>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate("video", {
+                  data: { id: id },
+                });
+              }}
+            >
+              <View style={styles.rbbutton}>
+                <Text style={styles.rbtext}>
+                  <Ionicons
+                    name="play"
+                    style={{
+                      fontSize: 24,
+                      textAlign: "center",
+                    }}
+                  />
+                  Watch
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate("video", {
+                  data: { id: id },
+                });
+              }}
+            >
+              <View style={styles.rbbutton}>
+                <Text style={styles.rbtext}>
+                  <Ionicons
+                    name="download"
+                    style={{ fontSize: 24, textAlign: "center" }}
+                  />
+                  Download
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate("video", {
+                  data: { id: id },
+                });
+              }}
+            >
+              <View style={styles.rbbutton}>
+                <Text style={styles.rbtext}>
+                  <MaterialIcons
+                    name="hd"
+                    style={{ fontSize: 24, textAlign: "center" }}
+                  />
+                  Quality
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.ratingcontainer}>
+          <View style={styles.ratingui}>
+            <Text style={styles.ratingtext}>{tiles.status}</Text>
+          </View>
+          <View style={styles.ratingui}>
+            <Text style={styles.ratingtext}>
+              <AntDesign name="star" />
+              {tiles.vote_average}
+            </Text>
+          </View>
+          <View style={styles.ratingui}>
+            <Text style={styles.ratingtext}>{tiles.vote_count}</Text>
+          </View>
+        </View>
+
         <View style={styles.details}>
           <Text
             style={[
@@ -81,6 +159,7 @@ const Watch = (props) => {
 const styles = StyleSheet.create({
   texts: {
     margin: 10,
+    marginTop: 1,
     fontSize: 20,
     color: "white",
     borderBottomColor: "grey",
@@ -88,14 +167,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   defview: {
-    flex: 1,
+    // flex: 1,
     height: "100%",
     width: "100%",
     backgroundColor: "black",
     margin: 0,
     padding: 10,
-    alignContent: "flex-start",
-    justifyContent: "flex-start",
+    // alignContent: "flex-start",
+    // justifyContent: "flex-start",
   },
   details: {
     backgroundColor: "black",
@@ -106,15 +185,62 @@ const styles = StyleSheet.create({
   },
   imagesss: {
     marginTop: 20,
-    alignContent: "flex-start",
-    justifyContent: "flex-start",
     alignSelf: "flex-start",
-    width: "100%",
-    height: 300,
-    resizeMode: "contain",
+    width: "40%",
+    marginLeft: 20,
+    height: 250,
+    // resizeMode: "contain",
     borderWidth: 2,
     borderColor: "grey",
     borderRadius: 10,
+  },
+  ratingui: {
+    width: 80,
+    height: 30,
+    borderRadius: 30 / 2,
+    backgroundColor: "red",
+  },
+  ratingtext: {
+    fontSize: 14,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "white",
+    padding: 4,
+  },
+  ratingcontainer: {
+    justifyContent: "space-between",
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 25,
+    flex: 1,
+    flexDirection: "row",
+  },
+  rbcontainer: {
+    marginTop: 20,
+    alignContent: "flex-end",
+    justifyContent: "space-between",
+    flex: 1,
+    flexDirection: "column",
+  },
+  rbbutton: {
+    alignSelf: "flex-end",
+    width: "65%",
+    backgroundColor: "grey",
+    marginLeft: 20,
+    marginRight: 20,
+    height: 60,
+    borderWidth: 2,
+    borderRadius: 15,
+  },
+  banner: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  rbtext: {
+    textAlign: "center",
+    fontSize: 18,
+    padding: 8,
+    fontWeight: "bold",
   },
 });
 

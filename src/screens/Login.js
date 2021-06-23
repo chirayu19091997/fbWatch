@@ -8,6 +8,8 @@ import {
   TextInput,
 } from "react-native";
 
+import { ToastAndroid, Platform, AlertIOS } from "react-native";
+
 const Login = (props) => {
   // State For Login.
   const [Login, setLogin] = React.useState({
@@ -18,10 +20,11 @@ const Login = (props) => {
   let userdata, admindata;
   // Handler For Retreiving Data And Login.
   const handleLogin = () => {
+    console.log(Login);
     axios
       .all([
-        axios.get("http://localhost:5000/users"),
-        axios.get("http://localhost:5000/admin"),
+        axios.get("http://567f9c8740df.ngrok.io/users"),
+        axios.get("http://567f9c8740df.ngrok.io/admin"),
       ])
       .then(async (res) => {
         userdata = await res[0].data;
@@ -72,7 +75,7 @@ const Login = (props) => {
         placeholder="Please Enter Your Email."
         type="email"
         value={Login.email}
-        onChangeText={(value) => setLogin(value)}
+        onChangeText={(e) => setLogin({ email: e })}
       />
       <TextInput
         style={styles.input}
@@ -80,7 +83,7 @@ const Login = (props) => {
         placeholder="Please Enter Your Password."
         type="password"
         value={Login.password}
-        onChangeText={(value) => setLogin(value)}
+        onChangeText={(e) => setLogin({ password: e })}
       />
       <TouchableOpacity
         onPress={() => {

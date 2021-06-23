@@ -2,8 +2,8 @@ import axios from "axios";
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { SectionGrid } from "react-native-super-grid";
-// @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display&display=swap');
 
+// Reusable components
 import SearchBar from "../components/SearchBar";
 
 const Content = (props) => {
