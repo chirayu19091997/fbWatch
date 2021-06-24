@@ -5,76 +5,23 @@ import { SectionGrid } from "react-native-super-grid";
 
 // Reusable components
 import SearchBar from "../components/SearchBar";
-import DropDownPicker from "react-native-dropdown-picker";
 
-const Content = (props) => {
+const Related = (props) => {
   const [movie, setmovie] = React.useState([]);
-  const [search, setsearch] = React.useState("");
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
-  const [items, setItems] = React.useState([
-    {
-      label: "All",
-      value: "All",
-    },
-    {
-      label: "Movie",
-      value: "movie",
-    },
-    {
-      label: "Tv-Series",
-      value: "tv",
-    },
-    {
-      label: "Anime",
-      value: "Anime",
-      disabled: true,
-    },
-  ]);
 
   React.useEffect(() => {
-    if (search !== "") {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=70ff3f0b91ef9042cccf0562ca7af840&query=${search}`
-        )
-        .then(async (res) => {
-          setmovie(await res.data.results);
-        })
-        .catch((err) => console.log(err));
-    } else {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/trending/all/week?api_key=70ff3f0b91ef9042cccf0562ca7af840`
-        )
-        .then(async (res) => {
-          setmovie(await res.data.results);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [search]);
+    axios
+      .get(
+        `https://api.themoviedb.org/3/trending/all/week?api_key=70ff3f0b91ef9042cccf0562ca7af840`
+      )
+      .then(async (res) => {
+        setmovie(await res.data.results);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <View style={styles.gridView}>
-      <SearchBar search={search} setsearch={setsearch} />
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        placeholder="Select Category"
-        loading={loading}
-        style={styles.dropdownf}
-        theme="DARK"
-        dropDownContainerStyle={{
-          width: "30%",
-          marginTop: 20,
-          marginLeft: 20,
-        }}
-      />
       <SectionGrid
         itemDimension={150}
         // staticDimension={300}
@@ -156,12 +103,6 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 5,
   },
-  dropdownf: {
-    color: "black",
-    width: "30%",
-    marginLeft: 20,
-    marginTop: 20,
-  },
 });
 
-export default Content;
+export default Related;

@@ -11,13 +11,21 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from "react-native-popup-menu";
 
 // Component Imports
 import Content from "./Content";
+import Related from "../components/Related";
 
 // Component
 const Watch = (props) => {
   const [tiles, setTiles] = React.useState([]);
+  const [quality, setQuality] = React.useState("d");
   let id = props.route.params.id;
 
   React.useEffect(() => {
@@ -35,21 +43,12 @@ const Watch = (props) => {
     <View style={styles.defview}>
       <ScrollView>
         <View style={styles.banner}>
-          {/* <TouchableOpacity
-            onPress={() => {
-              props.navigation.navigate("video", {
-                data: { id: id },
-              });
-            }}
-            style={styles.imagesss}
-          > */}
           <Image
             source={{
               uri: "https://image.tmdb.org/t/p/w500" + tiles.poster_path,
             }}
             style={styles.imagesss}
           />
-          {/* </TouchableOpacity> */}
 
           <View style={styles.rbcontainer}>
             <TouchableOpacity
@@ -89,22 +88,99 @@ const Watch = (props) => {
                 </Text>
               </View>
             </TouchableOpacity>
+
             <TouchableOpacity
-              onPress={() => {
-                props.navigation.navigate("video", {
-                  data: { id: id },
-                });
-              }}
+            // onPress={() => {
+            //   props.navigation.navigate("video", {
+            //     data: { id: id },
+            //   });
+            // }}
             >
-              <View style={styles.rbbutton}>
-                <Text style={styles.rbtext}>
-                  <MaterialIcons
-                    name="hd"
-                    style={{ fontSize: 24, textAlign: "center" }}
-                  />
-                  Quality
-                </Text>
-              </View>
+              <Menu>
+                <MenuTrigger>
+                  <View style={styles.rbbutton}>
+                    {quality === "d" ? (
+                      <Text style={styles.rbtext}>
+                        <MaterialIcons
+                          name="hd"
+                          style={{ fontSize: 24, textAlign: "center" }}
+                        />
+                        Quality
+                      </Text>
+                    ) : quality === "sd" ? (
+                      <Text style={styles.rbtext}>
+                        <MaterialIcons
+                          name="sd"
+                          style={{ fontSize: 24, textAlign: "center" }}
+                        />
+                        720p
+                      </Text>
+                    ) : (
+                      <Text style={styles.rbtext}>
+                        <MaterialIcons
+                          name="hd"
+                          style={{ fontSize: 24, textAlign: "center" }}
+                        />
+                        1080p
+                      </Text>
+                    )}
+                  </View>
+                </MenuTrigger>
+
+                <MenuOptions>
+                  {quality !== "sd" ? (
+                    <MenuOption onSelect={() => setQuality("sd")}>
+                      <Text style={styles.rbtext}>
+                        <MaterialIcons
+                          name="sd"
+                          style={{ fontSize: 18, textAlign: "center" }}
+                        />
+                        720p
+                      </Text>
+                    </MenuOption>
+                  ) : (
+                    <MenuOption
+                      disabled={true}
+                      onSelect={() => setQuality("sd")}
+                      style={{ backgroundColor: "gray" }}
+                    >
+                      <Text style={styles.rbtext}>
+                        <MaterialIcons
+                          name="sd"
+                          style={{ fontSize: 18, textAlign: "center" }}
+                        />
+                        720p
+                      </Text>
+                    </MenuOption>
+                  )}
+                  {quality !== "hd" ? (
+                    <MenuOption onSelect={() => setQuality("hd")}>
+                      <Text style={styles.rbtext}>
+                        <MaterialIcons
+                          name="hd"
+                          style={{ fontSize: 18, textAlign: "center" }}
+                        />
+                        1080p
+                      </Text>
+                    </MenuOption>
+                  ) : (
+                    <MenuOption
+                      disabled={true}
+                      onSelect={() => setQuality("hd")}
+                      style={{ backgroundColor: "gray" }}
+                    >
+                      <Text style={styles.rbtext}>
+                        <MaterialIcons
+                          name="hd"
+                          style={{ fontSize: 18, textAlign: "center" }}
+                        />
+                        1080p
+                      </Text>
+                    </MenuOption>
+                  )}
+                </MenuOptions>
+              </Menu>
+              {/* </View> */}
             </TouchableOpacity>
           </View>
         </View>
@@ -150,7 +226,7 @@ const Watch = (props) => {
         >
           Related
         </Text>
-        <Content />
+        <Related />
       </ScrollView>
     </View>
   );
@@ -241,6 +317,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 8,
     fontWeight: "bold",
+  },
+  popupdialog: {
+    borderRadius: 15,
   },
 });
 

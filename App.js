@@ -2,7 +2,12 @@ import "react-native-gesture-handler";
 import React from "react";
 
 import NavigationController from "./src/components/Navigation";
+import { MenuProvider } from "react-native-popup-menu";
 
 export default function App() {
-  return <NavigationController />;
+  return (
+    <MenuProvider>
+      <NavigationController />
+    </MenuProvider>
+  );
 }

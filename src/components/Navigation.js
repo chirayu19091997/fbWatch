@@ -76,7 +76,7 @@ function TabScreen(props) {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Home") {
+          if (route.name === "home") {
             iconName = focused ? "ios-home" : "ios-home-outline";
           } else if (route.name === "content") {
             iconName = focused ? "videocam" : "videocam-outline";
@@ -104,7 +104,7 @@ function TabScreen(props) {
       })}
     >
       <Tab.Screen
-        name="Home"
+        name="home"
         component={Home}
         options={{
           headerShown: false,
