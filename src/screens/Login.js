@@ -23,8 +23,8 @@ const Login = (props) => {
     console.log(Login);
     axios
       .all([
-        axios.get("http://567f9c8740df.ngrok.io/users"),
-        axios.get("http://567f9c8740df.ngrok.io/admin"),
+        axios.get("http://342dd655b904.ngrok.io/users"),
+        axios.get("http://342dd655b904.ngrok.io/admin"),
       ])
       .then(async (res) => {
         userdata = await res[0].data;
@@ -75,7 +75,7 @@ const Login = (props) => {
         placeholder="Please Enter Your Email."
         type="email"
         value={Login.email}
-        onChangeText={(e) => setLogin({ email: e })}
+        onChangeText={(e) => setLogin({ ...Login, email: e })}
       />
       <TextInput
         style={styles.input}
@@ -83,7 +83,7 @@ const Login = (props) => {
         placeholder="Please Enter Your Password."
         type="password"
         value={Login.password}
-        onChangeText={(e) => setLogin({ password: e })}
+        onChangeText={(e) => setLogin({ ...Login, password: e })}
       />
       <TouchableOpacity
         onPress={() => {

@@ -26,7 +26,7 @@ const Signup = (props) => {
     console.log(signup);
     if (signup.password === signup.confirmpassword && signup.password !== "") {
       axios
-        .post("http://567f9c8740df.ngrok.io/users/", {
+        .post("http://342dd655b904.ngrok.io/users/", {
           name: signup.name,
           phone: signup.phone,
           email: signup.email,
@@ -62,40 +62,40 @@ const Signup = (props) => {
       <Text style={styles.texts}>Create An Account With Us!</Text>
       <TextInput
         style={styles.input}
-        // value={signup.name}
+        value={signup.name}
         placeholder="Please Enter Your Name"
-        onChangeText={(v) => setsignup({ name: v })}
+        onChangeText={(v) => setsignup({ ...signup, name: v })}
       />
       <TextInput
         style={styles.input}
-        // value={signup.phone}
+        value={signup.phone}
         placeholder="Please Enter Your Phone Number"
         type="number"
         keyboardType="numeric"
-        onChangeText={(v) => setsignup({ phone: v })}
+        onChangeText={(v) => setsignup({ ...signup, phone: v })}
       />
       <TextInput
         style={styles.input}
-        // value={signup.email}
+        value={signup.email}
         placeholder="Please Enter Your Email."
         type="email"
-        onChangeText={(v) => setsignup({ email: v })}
+        onChangeText={(v) => setsignup({ ...signup, email: v })}
       />
       <TextInput
         style={styles.input}
-        // value={signup.password}
+        value={signup.password}
         placeholder="Please Enter Your Password."
         secureTextEntry={true}
         type="password"
-        onChangeText={(v) => setsignup({ password: v })}
+        onChangeText={(v) => setsignup({ ...signup, password: v })}
       />
       <TextInput
         style={styles.input}
-        // value={signup.confirmpassword}
+        value={signup.confirmpassword}
         placeholder="Please Enter Your Password Again."
         secureTextEntry={true}
         type="password"
-        onChangeText={(v) => setsignup({ confirmpassword: v })}
+        onChangeText={(v) => setsignup({ ...signup, confirmpassword: v })}
       />
 
       <TouchableOpacity onPress={handleSubmit} style={[styles.touch]}>
