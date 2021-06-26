@@ -1,71 +1,93 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  SafeAreaView,
+} from "react-native";
 
 const Home = (props) => {
+  const { height, width } = Dimensions.get("window");
+
   return (
-    <View>
-      <View style={styles.buttonContainer}>
-        <Text style={styles.text}>Hello, Welcome To fbWatch</Text>
-
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("content");
+    <SafeAreaView style={{ flex: 1 }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "white",
+          justifyContent: "flex-end",
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            position: "absolute",
+            alignItems: "center",
           }}
-          style={styles.appButtonContainer}
         >
-          <Text style={styles.appButtonText}>Dive In!</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("login");
+          <Image
+            source={require("../../assets/bg.jpg")}
+            style={{ flex: 1, height: height, width: width }}
+          />
+        </View>
+        <Text
+          style={{
+            fontSize: 35,
+            fontWeight: "bold",
+            textAlign: "center",
+            color: "black",
+            marginBottom: 70,
           }}
-          style={[styles.appButtonContainer, { marginTop: 20 }]}
         >
-          <Text style={styles.appButtonText}>LOGIN</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("signup");
-          }}
-          style={[styles.appButtonContainer, { marginTop: 20 }]}
-        >
-          <Text style={styles.appButtonText}>SIGNUP</Text>
-        </TouchableOpacity>
+          Welcome To fbWatch
+        </Text>
+        <View style={{ height: height / 2, justifyContent: "center" }}>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate("content");
+            }}
+          >
+            <View style={styles.button}>
+              <Text style={{ fontSize: 24, fontWeight: "bold" }}>DIVE IN</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate("login");
+            }}
+          >
+            <View style={styles.button}>
+              <Text style={{ fontSize: 24, fontWeight: "bold" }}>LOG IN</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate("signup");
+            }}
+          >
+            <View style={styles.button}>
+              <Text style={{ fontSize: 24, fontWeight: "bold" }}>SIGN UP</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  appButtonContainer: {
-    elevation: 8,
-    backgroundColor: "dodgerblue",
-    borderRadius: 40,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    marginTop: 400,
-    margin: 20,
-  },
-  appButtonText: {
-    fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-    alignSelf: "center",
-    textTransform: "uppercase",
-  },
-  text: {
-    fontSize: 25,
-  },
-  buttonContainer: {
-    width: "100%",
-    borderColor: "dimgray",
-    justifyContent: "center",
-    alignItems: "center",
+export default Home;
 
-    marginTop: "30%",
+const styles = StyleSheet.create({
+  button: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: 70,
+    borderRadius: 35,
+    marginHorizontal: 30,
+    backgroundColor: "white",
+    marginVertical: 10,
   },
 });
-
-export default Home;
