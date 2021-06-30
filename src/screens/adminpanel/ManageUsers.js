@@ -11,6 +11,9 @@ import {
 } from "../../actions/actions";
 
 const Users = (props) => {
+  useEffect(() => {
+    props.fetchUsers();
+  }, []);
   return (
     <div style={{ margin: "30px 15px 0 15px" }}>
       <Heading as="h3" block fluid style={{ textAlign: "center" }}>
