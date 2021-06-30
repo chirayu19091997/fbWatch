@@ -1,46 +1,23 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import { Button, Card, Image, Header as Heading } from "semantic-ui-react";
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
+import { connect } from "react-redux";
+import {
+  fetchUsers,
+  blacklistUser,
+  suspendUser,
+  removeUser,
+} from "../../actions/actions";
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/users")
-      .then((res) => {
-        const data = res.data;
-        setUsers(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const handleRemove = (id) => {
-    axios
-      .delete(`http://localhost:5000/users/${id}`)
-      .then((res) => {
-        toast.success("User Removed");
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handlePremium = (id) => {
-    axios
-      .patch(`http://localhost:5000/users/${id}`, { status: "Normal" })
-      .then((res) => {
-        toast.success("User is No Longer Premium!");
-      })
-      .catch((err) => console.log(err));
-  };
-
+const Users = (props) => {
   return (
     <div style={{ margin: "30px 15px 0 15px" }}>
       <Heading as="h3" block fluid style={{ textAlign: "center" }}>
         Manage Users Panel
       </Heading>
       <Card.Group>
-        {users.map((user) => (
+        {props.users.map((user) => (
           <Card centered>
             <Card.Content>
               <Image floated="right" size="mini" src="./rachel.png" />
@@ -53,15 +30,30 @@ const Users = () => {
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <div className="ui two buttons">
+              <div className="ui three buttons">
                 <Button
                   basic
                   color="green"
-                  onClick={() => handlePremium(user.id)}
+                  onClick={() =>
+                    props.suspendUser(user.id, { status: "Normal" })
+                  }
                 >
                   Suspend Premium
                 </Button>
-                <Button basic color="red" onClick={() => handleRemove(user.id)}>
+                <Button
+                  basic
+                  color="blue"
+                  onClick={() =>
+                    props.blacklistUser(user.id, { status: "Blacklisted" })
+                  }
+                >
+                  Blacklist User
+                </Button>
+                <Button
+                  basic
+                  color="red"
+                  onClick={() => props.removeUser(user.id)}
+                >
                   Remove
                 </Button>
               </div>
@@ -73,4 +65,13 @@ const Users = () => {
   );
 };
 
-export default Users;
+const mapStateToProps = (state) => ({
+  users: state.users.user,
+});
+
+export default connect(mapStateToProps, {
+  fetchUsers,
+  suspendUser,
+  blacklistUser,
+  removeUser,
+})(Users);

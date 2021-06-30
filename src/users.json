@@ -15,21 +15,12 @@
   ],
   "users": [
     {
-      "name": "a",
-      "phone": "a",
-      "email": "a",
-      "joined": 1623691704977,
-      "password": "a",
-      "status": "Normal",
-      "id": 1
-    },
-    {
       "name": "d",
       "phone": "d",
       "email": "d",
-      "joined": 1623821213943,
+      "joined": 1625071583221,
       "password": "d",
-      "status": "Blacklisted",
+      "status": "Normal",
       "id": 3
     }
   ]

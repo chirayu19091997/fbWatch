@@ -59,11 +59,6 @@ const Navbar = (props) => {
     setOpen(false);
   };
 
-  const handleblacklist = () => {
-    history.push("/blacklist");
-    setOpen(false);
-  };
-
   return (
     <>
       <Menu pointing secondary>
@@ -95,20 +90,18 @@ const Navbar = (props) => {
         </Link>
 
         <Menu.Menu position="right">
-          {props.searchable ? 
-          (
-          <Menu.Item>
-            <Input
-              // transparent
-              icon={{ name: "search", link: true }}
-              placeholder="Search Movie..."
-              className="search-style"
-              onChange={props.setSearch}
-            />
-          </Menu.Item>
+          {props.searchable ? (
+            <Menu.Item>
+              <Input
+                // transparent
+                icon={{ name: "search", link: true }}
+                placeholder="Search Movie..."
+                className="search-style"
+                onChange={props.setSearch}
+              />
+            </Menu.Item>
           ) : (
-            <>
-            </>
+            <></>
           )}
         </Menu.Menu>
 
@@ -132,12 +125,6 @@ const Navbar = (props) => {
                           Manage Users:{" "}
                           <Button color="black" onClick={handlemanage}>
                             Manage
-                          </Button>
-                        </p>
-                        <p>
-                          Blacklist Users:{" "}
-                          <Button color="black" onClick={handleblacklist}>
-                            Blacklist
                           </Button>
                         </p>
                         <p>
@@ -188,7 +175,7 @@ const Navbar = (props) => {
                         <p>Email: {email}</p>
                         <p>Phone: {phone}</p>
                         <p>Joined: {joined}</p>
-                        <p>Premium: { }</p>
+                        <p>Premium: {}</p>
                       </Modal.Description>
                     </Modal.Content>
                     <Modal.Actions>

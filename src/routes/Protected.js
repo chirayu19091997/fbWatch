@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router";
+import React from "react";
+import { Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
-import Navbar from "../common/Navbar";
+import Navbar from "../screens/common/Navbar";
 
-class PublicRoute extends Component {
+class ProtectedRoute extends React.Component {
   render() {
     const Component = this.props.component;
-    return this.props.loggedin ? (
+    return this.props.adminstatus ? (
       <>
         <Navbar
           loggedin={this.props.loggedin}
@@ -26,19 +26,15 @@ class PublicRoute extends Component {
           setAdminstatus={this.props.setAdminstatus}
           maintainence={this.props.maintainence}
           setMaintainence={this.props.setMaintainence}
-          search={this.props.search}
-          setSearch={this.props.setSearch}
-          searchable={this.props.searchable}
-          notType={this.props.notType}
         />
       </>
     ) : (
       <>
-        {toast.info("You Need To Be Member To Access This Page.")}
+        {toast.warning("Unauthorised Access Please Login With Admin Id.")}
         <Redirect to={{ pathname: "/login" }} />
       </>
     );
   }
 }
 
-export default PublicRoute;
+export default ProtectedRoute;
