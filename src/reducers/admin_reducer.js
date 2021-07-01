@@ -3,8 +3,9 @@ import {
   BLACKLIST_USER,
   REMOVE_USER,
   SUSPEND_PREMIUM,
-  BAN_USER,
 } from "../actions/action_types";
+
+// import BLACKLIST_USER_ASYNC from "../sagas/saga";
 
 const istate = {
   user: [],
@@ -22,11 +23,13 @@ const adminReducers = (state = istate, action) => {
         ...state,
         user: action.payload,
       };
-    case BLACKLIST_USER:
-      return {
-        ...state,
-        user: action.payload,
-      };
+    // case BLACKLIST_USER:
+    //   return {
+    //     ...state,
+    //     user: action.payload,
+    //   };
+    case "BLACKLIST_USER_ASYNC":
+      return state;
     case SUSPEND_PREMIUM:
       return {
         ...state,

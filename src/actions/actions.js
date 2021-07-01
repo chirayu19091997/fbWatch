@@ -3,7 +3,6 @@ import {
   BLACKLIST_USER,
   REMOVE_USER,
   SUSPEND_PREMIUM,
-  BAN_USER,
 } from "./action_types";
 
 import API from "../services/services";
