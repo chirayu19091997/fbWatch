@@ -15,6 +15,8 @@ import Content from "../screens/Content";
 import Watch from "../screens/Watch";
 import Account from "../screens/Account";
 
+// import UHome from "../screens/UHome";
+
 const RootStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 

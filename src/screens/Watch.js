@@ -26,6 +26,7 @@ import Related from "../components/Related";
 const Watch = (props) => {
   const [tiles, setTiles] = React.useState([]);
   const [quality, setQuality] = React.useState("d");
+  const [trim, setTrim] = React.useState(true);
   let id = props.route.params.id;
 
   React.useEffect(() => {
@@ -208,9 +209,17 @@ const Watch = (props) => {
           >
             {tiles.title}
           </Text>
-          <Text style={[styles.texts, { fontSize: 17 }]}>
-            {`${tiles.overview}`.slice(0, 150)}...
-          </Text>
+          <TouchableOpacity onPress={() => setTrim(!trim)}>
+            {trim ? (
+              <Text style={[styles.texts, { fontSize: 17 }]}>
+                {`${tiles.overview}`.slice(0, 150)}...
+              </Text>
+            ) : (
+              <Text style={[styles.texts, { fontSize: 17 }]}>
+                {tiles.overview}
+              </Text>
+            )}
+          </TouchableOpacity>
           <Text style={[styles.texts, { fontSize: 14 }]}>
             Original Language: {tiles.original_language}
           </Text>
@@ -218,7 +227,7 @@ const Watch = (props) => {
             Runtime: {tiles.runtime} m
           </Text>
           <Text style={[styles.texts, { fontSize: 14 }]}>
-            Revenue : {tiles.revenue} $
+            Tagline : {tiles.tagline}
           </Text>
         </View>
         <Text
