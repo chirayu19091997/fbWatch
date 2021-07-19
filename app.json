@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "fbwatchv2-native",
-    "slug": "fbwatchv2-native",
+    "name": "fbwatch",
+    "slug": "fbwatch",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,7 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.chirayuagrawal.fbwatchv2native"
+      "package": "com.chirayuagrawal.fbwatch"
     },
     "web": {
       "favicon": "./assets/favicon.png"

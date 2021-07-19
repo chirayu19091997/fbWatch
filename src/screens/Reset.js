@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import * as SecureStore from "expo-secure-store";
 
 import { ToastAndroid, Platform, AlertIOS } from "react-native";
 
@@ -18,13 +19,13 @@ const Reset = (props) => {
     confirmpassword: "",
   });
 
-  let userdata, admindata;
   // Handler For Retreiving Data And Login.
+  let userdata, admindata;
   const handleReset = () => {
     axios
       .all([
-        axios.get("http://342dd655b904.ngrok.io/users"),
-        axios.get("http://342dd655b904.ngrok.io/admin"),
+        axios.get("http://841b5e8a02dd.ngrok.io/users"),
+        axios.get("http://841b5e8a02dd.ngrok.io/admin"),
       ])
       .then(async (res) => {
         userdata = await res[0].data;
@@ -34,6 +35,17 @@ const Reset = (props) => {
       .catch((err) => console.log(err));
   };
 
+  // Handlers For Storing And Fetching Data From Local Storage.
+  async function save(key, value) {
+    await SecureStore.setItemAsync(key, value);
+  }
+
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key);
+    return result;
+  }
+
+  // Handler For Fetching User.
   const verification = async () => {
     for (let i = 0; i < userdata.length; i++) {
       for (let j = 0; j < admindata.length; j++) {
@@ -43,32 +55,37 @@ const Reset = (props) => {
           reset.email !== admindata[j].email &&
           userdata[i].status !== "Blacklisted"
         ) {
-          resetter(id);
+          save("id", "" + userdata[i].id);
+          resetter();
           break;
         } else if (
           reset.email !== userdata[i].email &&
           reset.password === reset.confirmpassword &&
           reset.email === admindata[j].email
         ) {
-          useMMKVStorage(id, admindata[j].id);
-          resetter(id);
+          save("id", "" + admindata[j].id);
+          resetter();
           break;
         }
       }
     }
   };
 
-  const resetter = (id) => {
-    axios
-      .patch(`http://342dd655b904.ngrok.io/users/${id}`, {
-        password: reset.password,
-      })
-      .then((res) => {
-        notifier("Password Reset Successful.");
-      })
-      .catch((err) => console.log(err));
+  // Resetter For Patching Password.
+  const resetter = () => {
+    getValueFor("id").then((id) =>
+      axios
+        .patch(`http://841b5e8a02dd.ngrok.io/users/${id}`, {
+          password: reset.password,
+        })
+        .then((res) => {
+          notifier("Password Reset Successful.");
+        })
+        .catch((err) => console.log(err))
+    );
   };
 
+  // Notifier.
   const notifier = (msg) => {
     if (Platform.OS === "android") {
       ToastAndroid.show(msg, ToastAndroid.SHORT);
