@@ -11,7 +11,7 @@ const Watch = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=70ff3f0b91ef9042cccf0562ca7af840`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=ee4b225859a0a74d406a1d2c2f2643b4`
       )
       .then((res) => {
         setTiles(res.data);
