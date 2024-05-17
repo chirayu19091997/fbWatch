@@ -6,7 +6,7 @@ import React, { Suspense } from 'react'
 const Search = () => {
   return (
     <Suspense>
-    <SearchList/>
+      <SearchList />
     </Suspense>
   )
 }

@@ -39,11 +39,9 @@ const VideoDetails = async ({ type, id, currSeason, currEpisode }: { type: strin
     console.log(`https://vidsrc.to/embed/${type}/${id}` + type == "tv" ? `/${currSeason || 1}/${currEpisode || 1}` : "")
     return (
         <div className='bg-gray-900 p-3 md:p-6 flex flex-col space-y-16 text-white'>
-            <div className='flex space-x-4'>
-                {type == "tv" && (
-                    
-                
-                <div className='flex flex-col space-y-2 w-1/3 max-h-[80vh] overflow-y-auto pr-2'>
+            <div className='flex space-x-4 max-md:flex-col-reverse max-md:space-y-4'>
+                {type == "tv" && (         
+                <div className='flex flex-col space-y-2 w-full md:w-1/3 max-h-[80vh] overflow-y-auto pr-2'>
                     {seasons.map((season: any,si:number) => (
                         <div key={season.id} className='flex flex-col'>
                             <div className='text-white text-lg font-bold text-center w-full'>{season.name}</div>
@@ -57,7 +55,6 @@ const VideoDetails = async ({ type, id, currSeason, currEpisode }: { type: strin
                 </div>
                 )}
                 <div className='w-full'>
-
                 <iframe src={`https://vidsrc.to/embed/${type}/${id}${(type == "tv" ? `/${currSeason || 1}/${currEpisode || 1}` : "")}`} className='w-full h-full min-h-[30vh] md:min-h-[80vh] rounded-lg' />
                 </div>
             </div>
