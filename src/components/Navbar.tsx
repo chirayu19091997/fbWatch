@@ -57,9 +57,9 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function NavigationMenuDemo() {
   return (
-    <div className="py-4 flex w-full shadow-md px-4 bg-gray-800">
+    <div className="py-4 flex max-md:flex-col w-full shadow-md px-4 bg-gray-800 sticky top-0 left-0 right-0 z-[999]">
       <Link href="/">
-        <Image src={logo} className="w-32 h-8" alt="logo" />
+        <h1 className="font-bold text-2xl text-white text-center max-md:pb-2">CJFLIX</h1>
         </Link>
       {/*
       <NavigationMenu>
@@ -122,7 +122,7 @@ export function NavigationMenuDemo() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu> */}
-      <div className="w-full flex justify-end items-center space-x-4 pr-4">
+      <div className="w-full flex justify-end items-center space-x-4 pr-4 max-md:pt-4">
         <CommandSearch />
       </div>
     </div>

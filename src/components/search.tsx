@@ -64,11 +64,9 @@ export default function CommandSearch() {
 
                 {inputValue.length > 2 && results.length === 0 && <div className="text-white px-4">No results found.</div>}
                 {inputValue.length > 0 && results.map((item, i) => (
-                    <Link key={item.id} href={`/movie/${item.id}`}>
-                        <div className={"text-white py-2 border-b text-sm px-2 mx-4"} key={item.id} >
+                        <div onClick={()=>{setInputValue(item.name);setOpen(false);router.push(`/search?query=${item.name}`)}} className={"text-white py-2 border-b text-sm px-2 mx-4"} key={item.id} >
                             {item.name}
                         </div>
-                    </Link>
                 ))}
 
             </HoverCardContent>

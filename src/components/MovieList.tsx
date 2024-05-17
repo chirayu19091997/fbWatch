@@ -5,7 +5,9 @@ import { MovieCard } from './Card'
 const MovieList = async () => {
     const movies = await TMDB_Api_Service.get("/trending/all/week");
   return (
-    <div className='grid grid-cols-5 gap-4 p-16 bg-gray-900 w-full'>
+    <div>
+        <h1 className='text-white text-2xl p-4 md:p-8 font-semibold'>Trending Now</h1>
+    <div className='grid grid-cols-2 md:grid-cols-5 md:gap-4 gap-2 px-3 md:px-8 bg-gray-900 w-full'>
         {movies.data.results.map((movie: any) => (
             <MovieCard
             key={movie.id} 
@@ -19,6 +21,7 @@ const MovieList = async () => {
             type={movie.media_type}
             />
         ))}
+    </div>
     </div>
   )
 }

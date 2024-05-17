@@ -1,11 +1,13 @@
 "use client"
 import SearchList from '@/components/SearchList'
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const Search = () => {
   return (
+    <Suspense>
     <SearchList/>
+    </Suspense>
   )
 }
 

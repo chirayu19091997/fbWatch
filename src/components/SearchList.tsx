@@ -18,9 +18,9 @@ const SearchList = () => {
     }
   }, [query])
   return (
-    <div className='flex flex-col space-y-4 bg-gray-900 p-16 w-full h-full'>
-      <p className='text-white'>Your Search Results for :- {query} </p>
-      <div className='grid grid-cols-5 gap-2'>
+    <div className='flex flex-col space-y-4 bg-gray-900 md:p-16 w-full h-full'>
+      <p className='text-white text-center py-2'>Your Search Results for :- {query} </p>
+      <div className='grid grid-cols-2 md:grid-cols-5 md:gap-4 gap-2 px-3 md:px-8 bg-gray-900 w-full'>
         {results.map((movie: any) => (
           <MovieCard
             key={movie.id}
